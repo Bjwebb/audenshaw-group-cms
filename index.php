@@ -88,6 +88,7 @@ echo "</ul><script type=\"text/javascript\"><!--\nnews_init($length); document.w
     width = 4;
     document.write(picCreate());
 --></script>
+<noscript>Sorry, this section does not currently work if you do not have javascript enabled. However, the director housing the pictures can be found <a href="http://two.xthost.info/aft/img/">here</a>.</noscript>
                             </span>
                             <span
                             onclick="javascript: picRight()"
@@ -228,7 +229,7 @@ for ($i=0; $i<count($members); $i++) {
             visibility: hidden;
             overflow: auto;
             ">
-            <span id="pic_title" style="font-size: 20px; font-weight: bold;">Alice and her Minions</span>
+            <span id="pic_title" style="font-size: 20px; font-weight: bold;"></span>
             <span id="pic_close" style="position: absolute; right: 0px;">
                 <a href="javascript: nowt()" onclick="javascript:picClose()">
                     X

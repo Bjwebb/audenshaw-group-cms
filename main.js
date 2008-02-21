@@ -61,14 +61,14 @@ function picCreate() {
     output = '';
     for (i=start; i<(start+width); i++) {
         if (i >= 0 && i < pics.length) {
-            output += "<a href=\"javascript: nowt()\" onclick=\"javascript: picPop('"+pics[i]+"', event)\">";
+            output += "<a href=\"javascript: nowt()\" onclick=\"javascript: picPop('"+pic_titles[i]+"', '"+pics[i]+"', event)\">";
             output += "<img style=\"\" src=\"http://two.xthost.info/aft/thumb/"+pics[i]+"\" alt=\"Pic\" />";
             output += "</a>";
         }
     }
     return output;
 }
-function picPop(url, e) {
+function picPop(title, url, e) {
 //     var posx = 0;
 //     var posy = 0;
 //     if (!e) var e = window.event;
@@ -90,6 +90,7 @@ function picPop(url, e) {
     document.getElementById('pic_pic').innerHTML = 
     '<a href="javascript: nowt()" onclick="javascript:picClose()">'+
     '<img alt="Picture" src="http://two.xthost.info/aft/img/'+url+'" /></a>';
+    document.getElementById('pic_title').innerHTML = title;
     document.getElementById('pic_pop').style.visibility = 'visible';
 }
 
