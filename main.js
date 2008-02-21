@@ -69,26 +69,35 @@ function picCreate() {
     return output;
 }
 function picPop(url, e) {
-    var posx = 0;
-    var posy = 0;
-    if (!e) var e = window.event;
-    if (e.pageX || e.pageY)         {
-        posx = e.pageX;
-        posy = e.pageY;
-    }
-    else if (e.clientX || e.clientY)        {
-        posx = e.clientX + document.body.scrollLeft
-                + document.documentElement.scrollLeft;
-        posy = e.clientY + document.body.scrollTop
-                + document.documentElement.scrollTop;
-    }
-    document.getElementById('pic_pop').style.left = posx+'px';
-    document.getElementById('pic_pop').style.top = posy+'px';
+//     var posx = 0;
+//     var posy = 0;
+//     if (!e) var e = window.event;
+//     if (e.pageX || e.pageY)         {
+//         posx = e.pageX;
+//         posy = e.pageY;
+//     }
+//     else if (e.clientX || e.clientY)        {
+//         posx = e.clientX + document.body.scrollLeft
+//                 + document.documentElement.scrollLeft;
+//         posy = e.clientY + document.body.scrollTop
+//                 + document.documentElement.scrollTop;
+//     }
+      
+    document.getElementById('pic_pop').style.left = document.body.scrollLeft + document.documentElement.scrollLeft+'px';
+    document.getElementById('pic_pop').style.top = document.body.scrollTop + document.documentElement.scrollTop+'px';
+    document.getElementById('pic_pop').style.maxHeight = window.innerHeight+'px';
+    document.getElementById('pic_pop').style.maxWidth = window.innerWidth+'0px';
     document.getElementById('pic_pic').innerHTML = 
     '<a href="javascript: nowt()" onclick="javascript:picClose()">'+
     '<img alt="Picture" src="http://two.xthost.info/aft/img/'+url+'" /></a>';
     document.getElementById('pic_pop').style.visibility = 'visible';
 }
+
+window.onscroll = function() {
+    document.getElementById('pic_pop').style.left = document.body.scrollLeft + document.documentElement.scrollLeft+'px';
+    document.getElementById('pic_pop').style.top = document.body.scrollTop + document.documentElement.scrollTop+'px';
+}
+
 function picClose() {
     document.getElementById('pic_pop').style.visibility = 'hidden';
     document.getElementById('pic_pic').innerHTML = '';

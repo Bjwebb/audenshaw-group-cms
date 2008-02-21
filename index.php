@@ -221,18 +221,20 @@ for ($i=0; $i<count($members); $i++) {
             </div>
         </div>
         <div id="pic_pop" style="
-            position:absolute;
-            background-color: white;
+            position: absolute;
+            background-color: #6CB6E7;
             top: 0px; left: 0px;
-            text-align: right;
+            text-align: center;
             visibility: hidden;
+            overflow: auto;
             ">
-            <div id="pic_close" style="">
+            <span id="pic_title" style="font-size: 20px; font-weight: bold;">Alice and her Minions</span>
+            <span id="pic_close" style="position: absolute; right: 0px;">
                 <a href="javascript: nowt()" onclick="javascript:picClose()">
                     X
                 </a>
-            </div>
-            <div id="pic_pic">
+            </span>
+            <div id="pic_pic" style="">
             </div>
         </div>
     </body>
