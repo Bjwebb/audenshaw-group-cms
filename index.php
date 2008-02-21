@@ -17,8 +17,6 @@
         <![endif]-->
         <script type="text/javascript" src="main.js"></script>
         <script type="text/javascript" src="http://two.xthost.info/aft/list.js"></script>
-?>);
-        </script>
         <title>Audenshaw School Fair Trade Committee</title>
     </head>
     <body>
@@ -77,7 +75,7 @@ echo "</ul><script type=\"text/javascript\"><!--\nnews_init($length); document.w
                     <div id="pics2" style="text-align: center;">
                         <h2>Pictures</h2>
                         <div id="pic_box">
-                            <span id="pic_left"
+                            <span
                             onclick="javascript: picLeft()"
                             onmouseover="javascript: document.getElementById('pic_left').style.backgroundColor = 'blue';"
                             onmouseout="javascript: document.getElementById('pic_left').style.backgroundColor = 'white';"
@@ -91,7 +89,7 @@ echo "</ul><script type=\"text/javascript\"><!--\nnews_init($length); document.w
     document.write(picCreate());
 --></script>
                             </span>
-                            <span id="pic_right"
+                            <span
                             onclick="javascript: picRight()"
                             onmouseover="javascript: document.getElementById('pic_right').style.backgroundColor = 'blue';"
                             onmouseout="javascript: document.getElementById('pic_right').style.backgroundColor = 'white';"
