@@ -16,7 +16,7 @@
         <link rel="stylesheet" type="text/css" href="ie_style.css" />
         <![endif]-->
         <script type="text/javascript" src="main.js"></script>
-        <script type="text/javascript" src="http://two.xthost.info/aft/list.js"></script>
+        <script type="text/javascript" src="list.js"></script>
         <title>Audenshaw School Fair Trade Committee</title>
     </head>
     <body>
