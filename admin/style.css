@@ -1,0 +1,24 @@
+body {
+    background-color: white;
+}
+h1 {
+    color: black;
+}
+span.tab {
+    display: table-cell;
+    width: 150px;
+    text-align: center;
+    border: thin solid black;
+    padding: 0px;
+}
+div.content {
+    position: absolute;
+    width: 750px;
+    margin: 10px auto;
+    border: thin solid black;
+    padding: 5px;
+    text-align: center;
+}
+#con2, #con3, #con4, #con5 {
+    visibility: hidden;
+}

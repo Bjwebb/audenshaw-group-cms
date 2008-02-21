@@ -1,0 +1,103 @@
+a {
+    color: blue;
+}
+a:hover {
+    color: red;
+}
+img {
+    border: 0px;
+}
+span.job {
+    font-style: italic;
+}
+body {
+    font-family: sans-serif;
+    background-color: black;
+    color: black;
+}
+h1 {
+    text-align: center;
+    font-family: sans-serif;
+    margin: 0px;
+    color: white;
+    font-size: 35px;
+}
+h2 {
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 20px;
+    margin: 3px 0px;
+}
+p {
+    font-family: sans-serif;
+    margin: 10px 10px;
+}
+ul {
+    font-family: sans-serif;
+}
+li.ajaxy {
+    font-weight: bold;
+}
+#all {
+    margin: 0px 50px;
+}
+#header {
+}
+#content {
+    display: table-row;
+}
+#bl, #br {
+    display: table-cell;
+}
+#left, #right, #middle {
+    margin-top: 0px;
+    display: table-cell;
+    padding: 10px;
+}
+#left {
+}
+#right {
+    width: 300px;
+}
+#pics, #about, #news, #projects, #facebook, #contact, #members, #links, #footer {
+    margin-top: 10px;
+    padding: 1px;
+    text-align: left;
+}
+#pics2, #about2, #news2, #projects2, #facebook2, #contact2, #members2, #links2, #footer2 {
+    border: thin solid black;
+}
+#pics, #about, #news, #projects, #footer {
+    background-color: #6CB6E7;
+}
+#facebook, #contact, #members, #links {
+    background-color: #BDD92D;
+}
+#middle {
+    width: 90px;
+    background-image: url('http://two.xthost.info/aft/img/logo.jpg');
+    background-repeat: repeat-y;
+}
+#logo {
+    position: absolute;
+}
+#pic_box {
+    display: table;
+    margin: 10px auto;
+    height: 300px;
+    border: thin solid black;
+    background-color: white;
+}
+#pic_left, #pic_right {
+    display: table-cell;
+}
+#pic_left {
+    border-right: thin solid black;
+}
+#pic_right {
+    border-left: thin solid black;
+}
+#pic_container {
+    display: table-cell;
+    width: 400px;
+}

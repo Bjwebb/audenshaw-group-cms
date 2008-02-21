@@ -1,0 +1,33 @@
+body {
+    text-align: center;
+}
+#all {
+    margin: 0px auto;
+}
+#content {
+    display: inline;
+}
+#left, #right, #middle {
+    position: absolute;
+    display: inline;
+    top: 60px;
+}
+#left {
+    left: 50px;
+    width: 480px;
+}
+#middle {
+    left: 550px;
+    width: 100px;
+    height: 1150px;
+}
+#right {
+    left: 650px;
+    width: 300px;
+}
+#logo {
+    position: absolute;
+}
+#pic_left, #pic_right {
+    border: none;
+}
