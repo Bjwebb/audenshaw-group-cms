@@ -88,7 +88,7 @@ echo "</ul><script type=\"text/javascript\"><!--\nnews_init($length); document.w
     width = 4;
     document.write(picCreate());
 --></script>
-<noscript>Sorry, this section does not currently work if you do not have javascript enabled. However, the director housing the pictures can be found <a href="http://two.xthost.info/aft/img/">here</a>.</noscript>
+<noscript><div>Sorry, this section does not currently work if you do not have javascript enabled. However, the director housing the pictures can be found <a href="http://two.xthost.info/aft/img/">here</a>.</div></noscript>
                             </span>
                             <span
                             onclick="javascript: picRight()"
