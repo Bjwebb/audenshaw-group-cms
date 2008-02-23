@@ -28,3 +28,7 @@ Copy config.php.example to config.php and change the details there
 to the correct ones for your sql server. You can then create the
 sql tables by going to mktables.php in your webbrowser.
 
+********** Pictures *********
+
+Make the directorys img and thumb, place and images you want into
+img and then run ./pics.sh to generate the thumbnails.
