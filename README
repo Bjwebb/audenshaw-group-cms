@@ -25,59 +25,6 @@ if anyone does do anything with this code.
 ********** Installation **********
 
 Copy config.php.example to config.php and change the details there
-to the correct ones for your sql server. You will need to create a
-database for the site and then create the tables using the following
-sql code:
+to the correct ones for your sql server. You can then create the
+sql tables by going to mktables.php in your webbrowser.
 
--- 
--- Table structure for table `members`
--- 
-
-CREATE TABLE `members` (
-  `id` int(11) NOT NULL auto_increment,
-  `firstName` char(20) default NULL,
-  `lastName` char(20) default NULL,
-  `position` char(40) default NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=42 ;
-
--- --------------------------------------------------------
-
--- 
--- Table structure for table `news`
--- 
-
-CREATE TABLE `news` (
-  `id` int(11) NOT NULL auto_increment,
-  `date` date NOT NULL default '0000-00-00',
-  `title` char(50) default NULL,
-  `text` text,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
--- --------------------------------------------------------
-
--- 
--- Table structure for table `other`
--- 
-
-CREATE TABLE `other` (
-  `id` int(11) NOT NULL auto_increment,
-  `type` char(20) default NULL,
-  `text` text,
-  `link` char(100) default NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
-
--- --------------------------------------------------------
-
--- 
--- Table structure for table `projects`
--- 
-
-CREATE TABLE `projects` (
-  `id` int(11) NOT NULL auto_increment,
-  `title` char(50) default NULL,
-  `text` text,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
