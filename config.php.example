@@ -7,4 +7,3 @@ $db_name = "aft"; // Database username
 $db_pass = "password"; // Database password
 $img_serv = "http://two.xthost.info/aft/"; // Image server
 ?>
-

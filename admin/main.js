@@ -104,3 +104,7 @@ function delOth(num) {
     cancel();
     ajax("type=othdel&id="+num, 'oth'+num);
 }
+
+function void() {
+
+}

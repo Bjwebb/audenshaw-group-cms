@@ -44,4 +44,3 @@ function post(params) {
 
     xmlHttp.send(params);
 }
-

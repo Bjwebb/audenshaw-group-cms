@@ -81,18 +81,43 @@ function formatOther($row) {
             ?></ul>
             <div id="projadd"><button type="button" onClick="editProj('add')">Add New Project</button></div>
     <?php }
-    function adminMembers() {
+    function memList() {
         global $con;
-        sqlcon(); ?>
+        sqlcon();
+        $result = mysql_query("SELECT * FROM members WHERE position!='' ORDER BY id",$con);
+        $prevID = '';
+        $rowArray;
+        $i = 0;
+        while ($row = mysql_fetch_array($result)) {
+            $rowArray[$i] = $row;
+            $i++;
+        }
+        for ($j=0; $j<$i; $j++) {
+            $ID = $rowArray[$j]['id'];
+            $nextID = $rowArray[$j+1]['id'];
+            echo "<li id=\"mem$ID\">";
+            if ($prevID)
+                echo "<a href=\"javascript:void()\" onClick=\"ajax('type=memmove&id1=$prevID&id2=$ID', 'memlist', false)\" style=\"text-decoration: none;\">↑</a>";
+            else echo "↑";
+            if ($nextID)
+                echo "<a href=\"javascript:void()\" onClick=\"ajax('type=memmove&id1=$ID&id2=$nextID', 'memlist', false)\" style=\"text-decoration: none;\">↓</a>";
+            else echo "↓";
+            echo " ";
+            formatMember($rowArray[$j]);
+            echo "</li>\n";
+            $prevID = $ID;
+        }
+        $result = mysql_query("SELECT * FROM members WHERE position='' ORDER BY lastName",$con);
+        while ($row = mysql_fetch_array($result)) {
+            echo "<li id=\"mem".$row['id']."\">";
+            formatMember($row);
+            echo "</li>\n";
+        }
+    }
+    function adminMembers() { ?>
             <h2>Members</h2>
-            <ul id="memlist"><?php
-                $result = mysql_query("SELECT * FROM members ORDER BY id",$con);
-                while ($row = mysql_fetch_array($result)) {
-                    echo "<li id=\"mem".$row['id']."\">";
-                    formatMember($row);
-                    echo "</li>\n";
-                }
-            ?>
+            <ul id="memlist">
+            <?php memList(); ?>
             </ul>
             <div id="memadd"><button type="button" onClick="editMem('add')">Add New Member</button></div>
     <?php }

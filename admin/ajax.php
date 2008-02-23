@@ -156,6 +156,20 @@
                     mysql_query("DELETE FROM members WHERE id=$id");
                     echo "<i>User Removed</i>";
                     break;
+                case 'memmove':
+                    $id1 = $_POST['id1'];
+                    $id2 = $_POST['id2'];
+                    mysql_query("UPDATE members
+                            SET id=1000
+                            WHERE id=$id1",$con); // If this breaks, then we are amazing
+                    mysql_query("UPDATE members
+                            SET id=$id1
+                            WHERE id=$id2",$con);
+                    mysql_query("UPDATE members
+                            SET id=$id2
+                            WHERE id=1000",$con);
+                    memList();
+                    break;
                     
                 case 'othform':
                     if ($id == 'social' || $id == 'contact' || $id == 'links') $row = Array();
