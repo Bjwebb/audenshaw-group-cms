@@ -16,7 +16,10 @@
         <link rel="stylesheet" type="text/css" href="ie_style.css" />
         <![endif]-->
         <script type="text/javascript" src="main.js"></script>
-        <script type="text/javascript" src="http://two.xthost.info/aft/list.js"></script>
+        <script type="text/javascript" src="<?php echo $img_serv; ?>list.js"></script>
+        <script type="text/javascript"><!--
+        imgServ = '<?php echo $img_serv; ?>';
+        --></script>
         <title>Audenshaw School Fair Trade Committee</title>
     </head>
     <body>
@@ -34,7 +37,7 @@
                     <div id="about">
                     <div id="about2">
                         <h2>About Us</h2>
-                            <div style="float: right;"><img src="http://two.xthost.info/aft/img/aftlogo.png" alt="Our Temporary Logo" width="150" style="margin:10px" /></div>
+                            <div style="float: right;"><img src="<?php echo $img_serv; ?>img/aftlogo.png" alt="Our Temporary Logo" width="150" style="margin:10px" /></div>
 <?php
     if ($result = mysql_query("SELECT text FROM other WHERE type='about'",$con)); else die(mysql_error());
     while ($row = mysql_fetch_array($result)) echo "<p>".nl2br($row['text'])."</p>";
@@ -88,7 +91,7 @@ echo "</ul><script type=\"text/javascript\"><!--\nnews_init($length); document.w
     width = 4;
     document.write(picCreate());
 --></script>
-<noscript><div>Sorry, this section does not currently work if you do not have javascript enabled. However, the director housing the pictures can be found <a href="http://two.xthost.info/aft/img/">here</a>.</div></noscript>
+<noscript><div>Sorry, this section does not currently work if you do not have javascript enabled. However, the director housing the pictures can be found <a href="<?php echo $img_serv; ?>img/">here</a>.</div></noscript>
                             </span>
                             <span
                             onclick="javascript: picRight()"
@@ -146,7 +149,7 @@ alt="Valid XHTML 1.1" height="31" width="88" /></a>
                           
                         </p>
                         <!--[if IE ]>
-                        <p><a href="http://getfirefox.com"><img src="http://two.xthost.info/aft/firefox_button.png" alt="| get Firefox |" height="15" width="80" /></a></p>
+                        <p><a href="http://getfirefox.com"><img src="<?php echo $img_serv; ?>firefox_button.png" alt="| get Firefox |" height="15" width="80" /></a></p>
                         <![endif]-->
                     </div>
                     </div>

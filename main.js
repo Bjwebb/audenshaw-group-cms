@@ -62,7 +62,7 @@ function picCreate() {
     for (i=start; i<(start+width); i++) {
         if (i >= 0 && i < pics.length) {
             output += "<a href=\"javascript: nowt()\" onclick=\"javascript: picPop('"+pic_titles[i]+"', '"+pics[i]+"', event)\">";
-            output += "<img style=\"\" src=\"http://two.xthost.info/aft/thumb/"+pics[i]+"\" alt=\"Pic\" />";
+            output += "<img style=\"\" src=\""+imgServ+"thumb/"+pics[i]+"\" alt=\"Pic\" />";
             output += "</a>";
         }
     }
@@ -89,7 +89,7 @@ function picPop(title, url, e) {
     document.getElementById('pic_pop').style.maxWidth = window.innerWidth+'0px';
     document.getElementById('pic_pic').innerHTML = 
     '<a href="javascript: nowt()" onclick="javascript:picClose()">'+
-    '<img alt="Picture" src="http://two.xthost.info/aft/img/'+url+'" /></a>';
+    '<img alt="Picture" src="'+imgServ+'img/'+url+'" /></a>';
     document.getElementById('pic_title').innerHTML = title;
     document.getElementById('pic_pop').style.visibility = 'visible';
 }
