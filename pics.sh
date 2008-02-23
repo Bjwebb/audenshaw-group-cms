@@ -9,5 +9,4 @@ composite -compose atop -gravity center ../thumb/$i.1 ../thumb/back.png ../thumb
 rm ../thumb/$i.1;
 done
 rm ../thumb/back.png;
-ftp two.xthost.info;
 
