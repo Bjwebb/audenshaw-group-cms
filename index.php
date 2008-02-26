@@ -135,7 +135,34 @@ echo "</ul><script type=\"text/javascript\"><!--\ninit($length); document.write(
                         </div>
                     </div>
                     </div>
-                        
+                    
+                    <div id="comments">
+                    <div id="comments2">
+                        <h2>Comments &amp; Ideas</h2>
+                        <div style="margin-left: 20px">
+                        <?php
+                            $comment = $_POST['comment'];
+                            $name = $_POST['name'];
+                            if ($comment) {
+                                if (!$name) $name = "Anonymous";
+                                $comment = strip_tags($comment,'<a>');
+                                if (mysql_query("INSERT INTO comments (name, comment) VALUES('$name', '$comment')", $con)); else die(mysql_error());
+                            }
+                            if ($result = mysql_query("SELECT * FROM comments",$con)); else die(mysql_error());
+                            while ($row = mysql_fetch_array($result)) {
+                                echo "<b>" . $row['name'] . "</b><br />";
+                                echo nl2br($row['comment']) . "<br /><br />";
+                            }
+                        ?>
+                        <b>Add a comment:</b><br/>
+                        <form action="#comments" method="post">
+                        <div>Name:<input type="text" name="name" /><br />
+                        <textarea name="comment" cols="40" rows="10"></textarea><button>Submit</button></div></form>
+                        <br />
+                        </div>
+                    </div>
+                    </div>
+                    
                     <div id="footer">
                     <div id="footer2">
 <div style="float:right"><p><a href="http://www.freedomain.co.nr/">
