@@ -85,8 +85,17 @@ function picPop(title, url, e) {
       
     document.getElementById('pic_pop').style.left = document.body.scrollLeft + document.documentElement.scrollLeft+'px';
     document.getElementById('pic_pop').style.top = document.body.scrollTop + document.documentElement.scrollTop+'px';
-    document.getElementById('pic_pop').style.maxHeight = window.innerHeight+'px';
-    document.getElementById('pic_pop').style.maxWidth = window.innerWidth+'0px';
+    winW = 10000; winH = 10000;
+    if (window.innerHeight || window.innerWidth) {
+        winH = window.innerHeight;
+        winW = window.innerWidth;
+    }
+    else {
+        winW = document.body.offsetWidth;
+        winH = document.body.offsetHeight;
+    }
+    document.getElementById('pic_pop').style.maxHeight = winH+'px';
+    document.getElementById('pic_pop').style.maxWidth = winW+'px';
     document.getElementById('pic_pic').innerHTML = 
     '<a href="javascript: nowt()" onclick="javascript:picClose()">'+
     '<img alt="Picture" src="'+imgServ+'img/'+url+'" /></a>';
