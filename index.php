@@ -49,7 +49,7 @@
                         <h2>News</h2>
                         <ul class="ajaxy">
 <?php 
-if ($result = mysql_query("SELECT title,text,date FROM news",$con)); else die(mysql_error());
+if ($result = mysql_query("SELECT title,text,date FROM news ORDER BY date DESC",$con)); else die(mysql_error());
 $link = Array("test");
 $text = Array();
 $date = Array();
