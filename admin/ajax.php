@@ -28,6 +28,9 @@
                     adminMembers();
                     break;
                 case 5:
+                    adminComments();
+                    break;
+                case 6:
                     adminOther();
                     break;
             }
@@ -207,6 +210,10 @@
                     break;
                 case 'othdel':
                     mysql_query("DELETE FROM other WHERE id=$id");
+                    echo "<i>Item Removed</i>";
+                    break;
+                case 'comdel':
+                    mysql_query("DELETE FROM comments WHERE id=$id");
                     echo "<i>Item Removed</i>";
                     break;
             }

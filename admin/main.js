@@ -104,6 +104,10 @@ function delOth(num) {
     cancel();
     ajax("type=othdel&id="+num, 'oth'+num);
 }
+function delCom(num) {
+    cancel();
+    ajax("type=comdel&id="+num, 'com'+num);
+}
 
 function void() {
 
