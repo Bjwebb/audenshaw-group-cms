@@ -37,7 +37,7 @@
                     <div id="about" class="box_left">
                     <div id="about2" class="box_left_inner">
                         <h2>About Us</h2>
-                            <div style="float: right;"><img src="<?php echo $img_serv; ?>img/aftlogo.png" alt="Our Temporary Logo" width="150" style="margin:10px" /></div>
+                            <?php if (showOther("image")) { ?><div style="float: right;"><img src="<?php echo $img_serv . showOther("image"); ?>" alt="Our Temporary Logo" width="150" style="margin:10px" /></div><?php } ?>
 <?php
     if ($result = mysql_query("SELECT text FROM `".$db_prefix."other` WHERE type='about'",$con)); else die(mysql_error());
     while ($row = mysql_fetch_array($result)) echo "<p>".nl2br($row['text'])."</p>";
@@ -176,7 +176,7 @@ alt="Valid XHTML 1.1" height="31" width="88" /></a>
                           
                         </p>
                         <!--[if IE ]>
-                        <p><a href="http://getfirefox.com"><img src="<?php echo $img_serv; ?>firefox_button.png" alt="| get Firefox |" height="15" width="80" /></a></p>
+                        <p><a href="http://getfirefox.com"><img src="http://two.xthost.info/aft/firefox_button.png" alt="| get Firefox |" height="15" width="80" /></a></p>
                         <![endif]-->
                     </div>
                     </div>
