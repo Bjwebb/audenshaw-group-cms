@@ -23,11 +23,10 @@
         <link rel="stylesheet" type="text/css" href="../ie_style.css">
         <![endif]-->
         <link rel="stylesheet" type="text/css" href="style.css">
-        <?php if ($_GET['id']) { ?>
         <script type="text/javascript"><!--
-            args = "?id=<?php echo $_GET['id']; ?>";
+            <?php if ($_GET['id']) echo "args = \"?id=" . $_GET['id'] . "\";\n";
+            else echo "args = \"\";\n"; ?>
         --></script>
-        <?php } ?>
         <script type="text/javascript" src="ajax.js">
         </script>
         <script type="text/javascript" src="main.js">

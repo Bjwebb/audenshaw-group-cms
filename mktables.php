@@ -44,11 +44,13 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$db_prefix."projects` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;", $con) or die(mysql_error());
 
-mysql_query("CREATE TABLE `".$db_prefix."comments` (
+mysql_query("CREATE TABLE IF NOT EXISTS `".$db_prefix."comments` (
   `id` int(11) NOT NULL auto_increment,
   `name` char(50) default NULL,
   `comment` text,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;", $con) or die(mysql_error());
+
+mysql_query("INSERT INTO ".$db_prefix."other (type,text) VALUES ('about','Insert a short description of your group here.')") or die(mysql_error());
 
 ?>
