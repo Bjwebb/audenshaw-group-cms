@@ -14,12 +14,14 @@ body {
     font-family: sans-serif;
     background-color: white;
     color: black;
+    background-image: url('http://two.xthost.info/audyai/gradient.png');
+    background-repeat: repeat-x;
 }
 h1 {
     text-align: center;
     font-family: sans-serif;
     margin: 0px;
-    color: black;
+    color: #FFFF00;
     font-size: 35px;
 }
 h2 {
@@ -27,6 +29,8 @@ h2 {
     font-family: sans-serif;
     font-size: 20px;
     margin: 3px 0px;
+    background-color: #FFFF00;
+    margin-top: 0px;
 }
 p {
     font-family: sans-serif;
@@ -61,20 +65,15 @@ li.ajaxy {
 }
 .box_left, .box_right {
     margin-top: 10px;
-    padding: 1px;
+    padding: 0px;
     text-align: left;
     border: thin solid black;
 }
 .box_left {
-    background-color: #DDFFFF;
+    background-color: #DDDDDD;
 }
 .box_right {
-    background-color: #FFDDDD;
-}
-#middle {
-//    width: 30px;
-//    background-image: url('http://two.xthost.info/aft/img/logo.jpg');
-//    background-repeat: repeat-y;
+    background-color: #BBBBBB;
 }
 #logo {
     position: absolute;
