@@ -74,6 +74,7 @@ echo "</ul><script type=\"text/javascript\"><!--\nnews_init($length); document.w
 ?>
                     </div>
                     </div>
+<?php if ($_GET['id'] != aa) { ?>
                     <div id="pics" class="box_left">
                     <div id="pics2" class="box_left_inner" style="text-align: center;">
                         <h2>Pictures</h2>
@@ -103,6 +104,7 @@ echo "</ul><script type=\"text/javascript\"><!--\nnews_init($length); document.w
                         </div>
                     </div>
                     </div>
+<?php } ?>
                     <div id="projects" class="box_left">
                     <div id="projects2" class="box_left_inner">
                         <h2>Our Current Projects</h2>
