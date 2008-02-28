@@ -8,7 +8,7 @@
         $name = "Audy Amnesty";
     }
     else {
-        $name = "Audenshaw Fair Trade Committeeization";
+        $name = "Audenshaw Fair Trade Committee";
     }
     if (mysql_select_db($db_db, $con)); else die(mysql_error());
     mysql_query("INSERT INTO `".$db_prefix."other` (type,text) VALUES ('title','$name')", $con) or die(mysql_error());
