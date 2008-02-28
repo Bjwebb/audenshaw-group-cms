@@ -59,18 +59,18 @@ li.ajaxy {
 #right {
     width: 300px;
 }
-#pics, #about, #news, #projects, #facebook, #contact, #members, #links, #footer, #comments {
+.box_left, .box_right {
     margin-top: 10px;
     padding: 1px;
     text-align: left;
 }
-#pics2, #about2, #news2, #projects2, #facebook2, #contact2, #members2, #links2, #footer2, #comments2 {
+.box_left_inner, .box_right_inner {
     border: thin solid black;
 }
-#pics, #about, #news, #projects, #footer, #comments {
+.box_left {
     background-color: #6CB6E7;
 }
-#facebook, #contact, #members, #links {
+.box_right {
     background-color: #BDD92D;
 }
 #middle {

@@ -34,8 +34,8 @@
             </div>
             <div id="content">
                 <div id="left">
-                    <div id="about">
-                    <div id="about2">
+                    <div id="about" class="box_left">
+                    <div id="about2" class="box_left_inner">
                         <h2>About Us</h2>
                             <div style="float: right;"><img src="<?php echo $img_serv; ?>img/aftlogo.png" alt="Our Temporary Logo" width="150" style="margin:10px" /></div>
 <?php
@@ -44,8 +44,8 @@
 ?>
                     </div>
                     </div>
-                    <div id="news">
-                    <div id="news2">
+                    <div id="news" class="box_left">
+                    <div id="news2" class="box_left_inner">
                         <h2>News</h2>
                         <ul class="ajaxy">
 <?php 
@@ -74,8 +74,8 @@ echo "</ul><script type=\"text/javascript\"><!--\nnews_init($length); document.w
 ?>
                     </div>
                     </div>
-                    <div id="pics">
-                    <div id="pics2" style="text-align: center;">
+                    <div id="pics" class="box_left">
+                    <div id="pics2" class="box_left_inner" style="text-align: center;">
                         <h2>Pictures</h2>
                         <div id="pic_box">
                             <span
@@ -103,8 +103,8 @@ echo "</ul><script type=\"text/javascript\"><!--\nnews_init($length); document.w
                         </div>
                     </div>
                     </div>
-                    <div id="projects">
-                    <div id="projects2">
+                    <div id="projects" class="box_left">
+                    <div id="projects2" class="box_left_inner">
                         <h2>Our Current Projects</h2>
                         <div class="text">
                             <ul class="ajaxy">
@@ -136,8 +136,8 @@ echo "</ul><script type=\"text/javascript\"><!--\ninit($length); document.write(
                     </div>
                     </div>
                     
-                    <div id="comments">
-                    <div id="comments2">
+                    <div id="comments" class="box_left">
+                    <div id="comments2" class="box_left_inner">
                         <h2>Comments &amp; Ideas</h2>
                         <div style="margin-left: 20px">
                         <?php
@@ -163,8 +163,8 @@ echo "</ul><script type=\"text/javascript\"><!--\ninit($length); document.write(
                     </div>
                     </div>
                     
-                    <div id="footer">
-                    <div id="footer2">
+                    <div id="footer" class="box_left">
+                    <div id="footer2" class="box_left_inner">
 <div style="float:right"><p><a href="http://www.freedomain.co.nr/">
 <img src="http://crnaa.4u.com.ru/808/2.gif" width="88" height="31" style="border: 0px;" alt="Free Domain Service" /></a></p></div>
 <div style="float:left"><p><a href="http://validator.w3.org/check?uri=referer"><img
@@ -184,8 +184,8 @@ alt="Valid XHTML 1.1" height="31" width="88" /></a>
                 <div id="middle">
                 </div>
                 <div id="right">
-                    <div id="facebook">
-                    <div id="facebook2">
+                    <div id="facebook" class="box_right">
+                    <div id="facebook2" class="box_right_inner">
                         <h2>Social Networking</h2>
                         <ul>
 <?php
@@ -196,8 +196,8 @@ alt="Valid XHTML 1.1" height="31" width="88" /></a>
                         *Account required.
                     </div>
                     </div>
-                    <div id="contact">
-                    <div id="contact2">
+                    <div id="contact" class="box_right">
+                    <div id="contact2" class="box_right_inner">
                         <h2>Contact Us</h2>
                         <ul>
 <?php
@@ -207,8 +207,8 @@ alt="Valid XHTML 1.1" height="31" width="88" /></a>
                         </ul>
                     </div>
                     </div>
-                    <div id="members">
-                    <div id="members2">
+                    <div id="members" class="box_right">
+                    <div id="members2" class="box_right_inner">
                         <h2>Members</h2>
                         <ul>
 <?php
@@ -237,8 +237,8 @@ for ($i=0; $i<count($members); $i++) {
                         </ul>
                     </div>
                     </div>
-                    <div id="links">
-                    <div id="links2">
+                    <div id="links" class="box_right">
+                    <div id="links2" class="box_right_inner">
                         <h2>Links</h2>
                         <ul>
 <?php
