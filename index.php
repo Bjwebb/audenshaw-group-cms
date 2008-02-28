@@ -74,7 +74,7 @@ echo "</ul><script type=\"text/javascript\"><!--\nnews_init($length); document.w
 ?>
                     </div>
                     </div>
-<?php if ($_GET['id'] != aa) { ?>
+<?php if (showOther("showPictures") == "TRUE") { ?>
                     <div id="pics" class="box_left">
                     <div id="pics2" class="box_left_inner" style="text-align: center;">
                         <h2>Pictures</h2>
