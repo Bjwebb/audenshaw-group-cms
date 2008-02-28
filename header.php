@@ -1,4 +1,13 @@
 <?php
+function showOther($type) {
+    global $con;
+    global $db_prefix;
+    if ($result = mysql_query("SELECT text FROM `".$db_prefix."other` WHERE type='$type'",$con)); else die(mysql_error());
+    $row = mysql_fetch_array($result);
+    return $row['text'];
+}
+
+
 function formatNews($row) {
     $i = $row['id'];
     echo "<b>".$row['title']."</b><br/>";

@@ -5,13 +5,13 @@
     if (!$con) {
       die('Could not connect: ' . mysql_error());
     }
-    if (mysql_select_db($db_db, $con)); else die(mysql_error());
+    if (mysql_select_db($db_db, $con)); else die(mysql_error()); 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
         <meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
-        <link rel="stylesheet" type="text/css" href="style.css" />
+        <link rel="stylesheet" type="text/css" href="style<?php echo $css_suffix ?>.css" />
         <!--[if IE ]>
         <link rel="stylesheet" type="text/css" href="ie_style.css" />
         <![endif]-->
@@ -20,7 +20,7 @@
         <script type="text/javascript"><!--
         imgServ = '<?php echo $img_serv; ?>';
         --></script>
-        <title>Audenshaw School Fair Trade Committee</title>
+        <title><?php echo showOther("title"); ?></title>
     </head>
     <body>
         <div id="all">
@@ -30,7 +30,7 @@
             }
             --></script>
             <div id="header">
-                <h1>Audenshaw School Fair Trade Committee</h1>
+                <h1><?php echo showOther("title"); ?></h1>
             </div>
             <div id="content">
                 <div id="left">
