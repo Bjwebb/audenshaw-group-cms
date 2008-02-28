@@ -36,7 +36,7 @@ function ajax(params, container, increment) {
 }
 
 function post(params) {
-    xmlHttp.open("POST","ajax.php",true);
+    xmlHttp.open("POST","ajax.php"+args,true);
     
     xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlHttp.setRequestHeader("Content-length", params.length);

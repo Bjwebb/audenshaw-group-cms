@@ -39,7 +39,7 @@
                         <h2>About Us</h2>
                             <div style="float: right;"><img src="<?php echo $img_serv; ?>img/aftlogo.png" alt="Our Temporary Logo" width="150" style="margin:10px" /></div>
 <?php
-    if ($result = mysql_query("SELECT text FROM other WHERE type='about'",$con)); else die(mysql_error());
+    if ($result = mysql_query("SELECT text FROM `".$db_prefix."other` WHERE type='about'",$con)); else die(mysql_error());
     while ($row = mysql_fetch_array($result)) echo "<p>".nl2br($row['text'])."</p>";
 ?>
                     </div>
@@ -49,7 +49,7 @@
                         <h2>News</h2>
                         <ul class="ajaxy">
 <?php 
-if ($result = mysql_query("SELECT title,text,date FROM news ORDER BY date DESC",$con)); else die(mysql_error());
+if ($result = mysql_query("SELECT title,text,date FROM `".$db_prefix."news` ORDER BY date DESC",$con)); else die(mysql_error());
 $link = Array("test");
 $text = Array();
 $date = Array();
@@ -109,7 +109,7 @@ echo "</ul><script type=\"text/javascript\"><!--\nnews_init($length); document.w
                         <div class="text">
                             <ul class="ajaxy">
 <?php 
-if ($result = mysql_query("SELECT title,text FROM projects",$con)); else die(mysql_error());
+if ($result = mysql_query("SELECT title,text FROM `".$db_prefix."projects`",$con)); else die(mysql_error());
 $link = Array("test");
 $link[0] = "Oh noes";
 $text = Array();
@@ -146,9 +146,9 @@ echo "</ul><script type=\"text/javascript\"><!--\ninit($length); document.write(
                             if ($comment) {
                                 if (!$name) $name = "Anonymous";
                                 $comment = strip_tags($comment,'<a>');
-                                if (mysql_query("INSERT INTO comments (name, comment) VALUES('$name', '$comment')", $con)); else die(mysql_error());
+                                if (mysql_query("INSERT INTO `".$db_prefix."comments` (name, comment) VALUES('$name', '$comment')", $con)); else die(mysql_error());
                             }
-                            if ($result = mysql_query("SELECT * FROM comments",$con)); else die(mysql_error());
+                            if ($result = mysql_query("SELECT * FROM `".$db_prefix."comments`",$con)); else die(mysql_error());
                             while ($row = mysql_fetch_array($result)) {
                                 echo "<b>" . $row['name'] . "</b><br />";
                                 echo nl2br($row['comment']) . "<br /><br />";
@@ -189,7 +189,7 @@ alt="Valid XHTML 1.1" height="31" width="88" /></a>
                         <h2>Social Networking</h2>
                         <ul>
 <?php
-    if ($result = mysql_query("SELECT text,link FROM other WHERE type='social'",$con)); else die(mysql_error());
+    if ($result = mysql_query("SELECT text,link FROM `".$db_prefix."other` WHERE type='social'",$con)); else die(mysql_error());
     while ($row = mysql_fetch_array($result)) echo "<li><a href=\"".$row['link']."\">".$row['text']."</a></li>";
 ?>
                         </ul>
@@ -201,7 +201,7 @@ alt="Valid XHTML 1.1" height="31" width="88" /></a>
                         <h2>Contact Us</h2>
                         <ul>
 <?php
-    if ($result = mysql_query("SELECT text,link FROM other WHERE type='contact'",$con)); else die(mysql_error());
+    if ($result = mysql_query("SELECT text,link FROM `".$db_prefix."other` WHERE type='contact'",$con)); else die(mysql_error());
     while ($row = mysql_fetch_array($result)) echo "<li><a href=\"".$row['link']."\">".$row['text']."</a></li>";
 ?>
                         </ul>
@@ -212,7 +212,7 @@ alt="Valid XHTML 1.1" height="31" width="88" /></a>
                         <h2>Members</h2>
                         <ul>
 <?php
-if ($result = mysql_query("SELECT * FROM members WHERE position!='' ORDER BY id",$con)); else die(mysql_error());
+if ($result = mysql_query("SELECT * FROM `".$db_prefix."members` WHERE position!='' ORDER BY id",$con)); else die(mysql_error());
 $members = Array ();
 $i = 0;
 while ($row = mysql_fetch_array($result)) {
@@ -220,7 +220,7 @@ while ($row = mysql_fetch_array($result)) {
     $members[$i][1] = $row['position'];
     $i++;
 }
-if ($result = mysql_query("SELECT * FROM members WHERE position='' ORDER BY lastName",$con)); else die(mysql_error());
+if ($result = mysql_query("SELECT * FROM `".$db_prefix."members` WHERE position='' ORDER BY lastName",$con)); else die(mysql_error());
 while ($row = mysql_fetch_array($result)) {
     $members[$i][0] = $row['firstName']." ".$row['lastName'];
     $members[$i][1] = $row['position'];
@@ -242,7 +242,7 @@ for ($i=0; $i<count($members); $i++) {
                         <h2>Links</h2>
                         <ul>
 <?php
-    if ($result = mysql_query("SELECT text,link FROM other WHERE type='links'",$con)); else die(mysql_error());
+    if ($result = mysql_query("SELECT text,link FROM `".$db_prefix."other` WHERE type='links'",$con)); else die(mysql_error());
     while ($row = mysql_fetch_array($result)) echo "<li><a href=\"".$row['link']."\">".$row['text']."</a></li>";
 ?>
                         </ul>

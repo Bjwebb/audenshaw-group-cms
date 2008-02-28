@@ -23,6 +23,11 @@
         <link rel="stylesheet" type="text/css" href="../ie_style.css">
         <![endif]-->
         <link rel="stylesheet" type="text/css" href="style.css">
+        <?php if ($_GET['id']) { ?>
+        <script type="text/javascript"><!--
+            args = "?id=<?php echo $_GET['id']; ?>";
+        --></script>
+        <?php } ?>
         <script type="text/javascript" src="ajax.js">
         </script>
         <script type="text/javascript" src="main.js">
@@ -41,25 +46,6 @@
         <div class="content" id="content">
 <?php adminAbout(); ?>
         </div>
-<?php /*
-        <div class="content" id="con1">
-<?php adminAbout(); ?>
-        </div>
-        <div class="content" id="con2">
-<?php adminNews(); ?>
-            <div id="newsadd"><button type="button" onClick="editNews('add')">Add New Story</button></div>
-        </div>
-        <div class="content" id="con3">
-<?php adminProjects(); ?>
-            <div id="projadd"><button type="button" onClick="editProj('add')">Add New Project</button></div>
-        </div>
-        <div class="content" id="con4">
-<?php adminMembers(); ?>
-        </div>
-        <div class="content" id="con5">
-<?php adminOther(); ?>
-         </div>
-*/ ?>
     </body>
 </html>
 <?php } else loginform(); ?>

@@ -1,6 +1,7 @@
 <?php
     include '../config.php';
     include '../header.php';
+    
     $con = mysql_connect($db_host,$db_name,$db_pass);
     if (!$con) {
       die('Could not connect: ' . mysql_error());
@@ -39,12 +40,12 @@
             switch ($type) {
                 case 'about':
                     $text = $_POST['text'];
-                    if (mysql_query("UPDATE other SET text='$text' WHERE type='about'")) echo "Success!!1";
+                    if (mysql_query("UPDATE ".$db_prefix."other SET text='$text' WHERE type='about'")) echo "Success!!1";
                     break;
                 case 'newsform':
                     if ($id == 'add') $row = Array();
                     else {
-                        $result = mysql_query("SELECT * FROM news WHERE id=$id",$con);
+                        $result = mysql_query("SELECT * FROM ".$db_prefix."news WHERE id=$id",$con);
                         $row = mysql_fetch_array($result);
                     }
                     echo "<form id=\"ajaxform\">";
@@ -58,17 +59,17 @@
                     $text = $_POST['text'];
                     $title = $_POST['title'];
                     if ($id == 'add') {
-                        mysql_query("INSERT INTO news
+                        mysql_query("INSERT INTO ".$db_prefix."news
                             (title, text, date)
                             VALUES ('$title', '$text', NOW())",$con);
                         $id = mysql_insert_id($con);
                         $add = true;
                     } else {
-                        mysql_query("UPDATE news
+                        mysql_query("UPDATE ".$db_prefix."news
                             SET title='$title', text='$text'
                             WHERE id=$id",$con);
                     }
-                    $result = mysql_query("SELECT * FROM news WHERE id=$id",$con);
+                    $result = mysql_query("SELECT * FROM ".$db_prefix."news WHERE id=$id",$con);
                     while ($row = mysql_fetch_array($result)) {
                         if ($add) echo "<li id=\"proj$id\">";
                         formatProject($row);
@@ -76,14 +77,14 @@
                     }
                     break;
                 case 'newsdel':
-                    mysql_query("DELETE FROM news WHERE id=$id");
+                    mysql_query("DELETE FROM ".$db_prefix."news WHERE id=$id");
                     echo "<i>Story Removed</i>";
                     break;
                 
                 case 'projform':
                     if ($id == 'add') $row = Array();
                     else {
-                        $result = mysql_query("SELECT * FROM projects WHERE id=$id",$con);
+                        $result = mysql_query("SELECT * FROM ".$db_prefix."projects WHERE id=$id",$con);
                         $row = mysql_fetch_array($result);
                     }
                     echo "<form id=\"ajaxform\">";
@@ -98,17 +99,17 @@
                     $text = $_POST['text'];
                     $title = $_POST['title'];
                     if ($id == 'add') {
-                        mysql_query("INSERT INTO projects
+                        mysql_query("INSERT INTO ".$db_prefix."projects
                             (title, text)
                             VALUES ('$title', '$text')",$con);
                         $id = mysql_insert_id($con);
                         $add = true;
                     } else {
-                        mysql_query("UPDATE projects
+                        mysql_query("UPDATE ".$db_prefix."projects
                             SET title='$title', text='$text'
                             WHERE id=$id",$con);
                     }
-                    $result = mysql_query("SELECT * FROM projects WHERE id=$id",$con);
+                    $result = mysql_query("SELECT * FROM ".$db_prefix."projects WHERE id=$id",$con);
                     while ($row = mysql_fetch_array($result)) {
                         if ($add) echo "<li id=\"proj$id\">";
                         formatProject($row);
@@ -116,13 +117,13 @@
                     }
                     break;
                 case 'projdel':
-                    mysql_query("DELETE FROM projects WHERE id=$id");
+                    mysql_query("DELETE FROM ".$db_prefix."projects WHERE id=$id");
                     echo "<i>Project Removed</i>";
                     break;
                 case 'memform':
                     if ($id == 'add') $row = Array();
                     else {
-                        $result = mysql_query("SELECT * FROM members WHERE id=$id ORDER BY id",$con);
+                        $result = mysql_query("SELECT * FROM ".$db_prefix."members WHERE id=$id ORDER BY id",$con);
                         $row = mysql_fetch_array($result);
                     }
                     echo "<form id=\"ajaxform\">";
@@ -138,7 +139,7 @@
                     $ln = $_POST['ln'];
                     $pos = $_POST['pos'];
                     if ($id == 'add') {
-                        mysql_query("INSERT INTO members
+                        mysql_query("INSERT INTO ".$db_prefix."members
                             (firstName, lastName, position)
                             VALUES ('$fn', '$ln', '$pos')",$con);
                         $id = mysql_insert_id($con);
@@ -148,7 +149,7 @@
                             SET firstName='$fn', lastName='$ln', position='$pos'
                             WHERE id=$id",$con);
                     }
-                    $result = mysql_query("SELECT * FROM members WHERE id=$id",$con);
+                    $result = mysql_query("SELECT * FROM ".$db_prefix."members WHERE id=$id",$con);
                     while ($row = mysql_fetch_array($result)) {
                         if ($add) echo "<li id=\"mem$id\">";
                         formatMember($row);
@@ -156,19 +157,19 @@
                     }
                     break;
                 case 'memdel':
-                    mysql_query("DELETE FROM members WHERE id=$id");
+                    mysql_query("DELETE FROM ".$db_prefix."members WHERE id=$id");
                     echo "<i>User Removed</i>";
                     break;
                 case 'memmove':
                     $id1 = $_POST['id1'];
                     $id2 = $_POST['id2'];
-                    mysql_query("UPDATE members
+                    mysql_query("UPDATE ".$db_prefix."members
                             SET id=1000
                             WHERE id=$id1",$con); // If this breaks, then we are amazing
-                    mysql_query("UPDATE members
+                    mysql_query("UPDATE ".$db_prefix."members
                             SET id=$id1
                             WHERE id=$id2",$con);
-                    mysql_query("UPDATE members
+                    mysql_query("UPDATE ".$db_prefix."members
                             SET id=$id2
                             WHERE id=1000",$con);
                     memList();
@@ -177,7 +178,7 @@
                 case 'othform':
                     if ($id == 'social' || $id == 'contact' || $id == 'links') $row = Array();
                     else {
-                        $result = mysql_query("SELECT * FROM other WHERE id=$id",$con);
+                        $result = mysql_query("SELECT * FROM ".$db_prefix."other WHERE id=$id",$con);
                         $row = mysql_fetch_array($result);
                     }
                     echo "<form id=\"ajaxform\">";
@@ -191,17 +192,17 @@
                     $text = $_POST['text'];
                     $link = $_POST['link'];
                     if ($id == 'social' || $id == 'contact' || $id == 'links') {
-                        mysql_query("INSERT INTO other
+                        mysql_query("INSERT INTO ".$db_prefix."other
                             (link, text, type)
                             VALUES ('$link', '$text', '$id')",$con);
                         $id = mysql_insert_id($con);
                         $add = true;
                     } else {
-                        mysql_query("UPDATE other
+                        mysql_query("UPDATE ".$db_prefix."other
                             SET link='$link', text='$text'
                             WHERE id=$id",$con);
                     }
-                    $result = mysql_query("SELECT * FROM other WHERE id=$id",$con);
+                    $result = mysql_query("SELECT * FROM ".$db_prefix."other WHERE id=$id",$con);
                     while ($row = mysql_fetch_array($result)) {
                         if ($add) echo "<li id=\"oth$id\">";
                         formatOther($row);
@@ -209,14 +210,14 @@
                     }
                     break;
                 case 'othdel':
-                    mysql_query("DELETE FROM other WHERE id=$id");
+                    mysql_query("DELETE FROM ".$db_prefix."other WHERE id=$id");
                     echo "<i>Item Removed</i>";
                     break;
                 case 'comdel':
-                    mysql_query("DELETE FROM comments WHERE id=$id");
+                    mysql_query("DELETE FROM ".$db_prefix."comments WHERE id=$id");
                     echo "<i>Item Removed</i>";
                     break;
             }
         }
-    } else echo "Access denyed $sid";
+    } else echo "Access denied. $sid";
 ?>

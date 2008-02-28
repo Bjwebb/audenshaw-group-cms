@@ -31,6 +31,7 @@ function formatOther($row) {
 
 function sqlcon() {
     global $con;
+    global $db_prefix;
     include '../config.php';
     $con = mysql_connect($db_host,$db_name,$db_pass);
     if (!$con) {
@@ -40,11 +41,12 @@ function sqlcon() {
 }
 function adminAbout() {
     global $con;
+    global $db_prefix;
     sqlcon(); ?>
         <h2>About</h2>
         <form name="form1">
             <textarea cols="100" rows="20" id="about"><?php
-                $result = mysql_query("SELECT text FROM other WHERE type='about'",$con);
+                $result = mysql_query("SELECT text FROM ".$db_prefix."other WHERE type='about'",$con);
                 $row = mysql_fetch_row($result);
                 echo $row[0];
             ?></textarea>
@@ -54,10 +56,11 @@ function adminAbout() {
 <?php }
 function adminNews() {
     global $con;
+    global $db_prefix;
     sqlcon(); ?>
         <h2>News</h2>
         <ul id="newslist"><?php
-            $result = mysql_query("SELECT * FROM news",$con);
+            $result = mysql_query("SELECT * FROM ".$db_prefix."news",$con);
             while ($row = mysql_fetch_array($result)) {
                 $i = $row['id'];
                 echo "<li id=\"news".$row['id']."\">";
@@ -69,10 +72,11 @@ function adminNews() {
 <?php }
 function adminProjects() {
     global $con;
+    global $db_prefix;
     sqlcon(); ?>
         <h2>Projects</h2>
         <ul id="projlist"><?php
-            $result = mysql_query("SELECT * FROM projects",$con);
+            $result = mysql_query("SELECT * FROM ".$db_prefix."projects",$con);
             while ($row = mysql_fetch_array($result)) {
                 echo "<li id=\"proj".$row['id']."\">";
                 formatProject($row);
@@ -83,8 +87,9 @@ function adminProjects() {
 <?php }
 function memList() {
     global $con;
+    global $db_prefix;
     sqlcon();
-    $result = mysql_query("SELECT * FROM members WHERE position!='' ORDER BY id",$con);
+    $result = mysql_query("SELECT * FROM ".$db_prefix."members WHERE position!='' ORDER BY id",$con);
     $prevID = '';
     $rowArray;
     $i = 0;
@@ -107,7 +112,7 @@ function memList() {
         echo "</li>\n";
         $prevID = $ID;
     }
-    $result = mysql_query("SELECT * FROM members WHERE position='' ORDER BY lastName",$con);
+    $result = mysql_query("SELECT * FROM ".$db_prefix."members WHERE position='' ORDER BY lastName",$con);
     while ($row = mysql_fetch_array($result)) {
         echo "<li id=\"mem".$row['id']."\">";
         formatMember($row);
@@ -123,10 +128,11 @@ function adminMembers() { ?>
 <?php }
 function adminComments() {
     global $con;
+    global $db_prefix;
     sqlcon();?>
         <h2>Delete Comments</h2>
         <?php
-            $result = mysql_query("SELECT * FROM comments",$con);
+            $result = mysql_query("SELECT * FROM ".$db_prefix."comments",$con);
             while ($row = mysql_fetch_array($result)) {
                 $i = $row['id'];
                 echo "<div id=\"com".$i."\">";
@@ -137,6 +143,7 @@ function adminComments() {
 }
 function adminOther() {
     global $con;
+    global $db_prefix;
     sqlcon(); ?>
         <h2>Other</h2>
         <?php
@@ -144,7 +151,7 @@ function adminOther() {
             for ($j=0; $j<count($types); $j++) {
                 $type = $types[$j];
                 echo "<ul id=\"oth$type"."list\">";
-                $result = mysql_query("SELECT * FROM other WHERE type='$type'",$con);
+                $result = mysql_query("SELECT * FROM ".$db_prefix."other WHERE type='$type'",$con);
                 while ($row = mysql_fetch_array($result)) {
                     echo "<li id=\"oth".$row['id']."\">";
                     formatOther($row);
