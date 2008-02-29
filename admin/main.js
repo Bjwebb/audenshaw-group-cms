@@ -109,6 +109,3 @@ function delCom(num) {
     ajax("type=comdel&id="+num, 'com'+num);
 }
 
-function void() {
-
-}

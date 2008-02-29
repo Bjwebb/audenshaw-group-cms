@@ -6,6 +6,12 @@ h1 {
     color: black;
     text-align: center;
 }
+a {
+    color: blue;
+}
+a:hover {
+    color: red
+}
 span.tab {
     display: table-cell;
     width: 150px;
