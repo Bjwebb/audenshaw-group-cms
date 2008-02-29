@@ -10,7 +10,7 @@
     
     $id = $_POST['id'];
     $type = $_POST['type'];
-    $sid = $_COOKIE['aftcook'];
+    $sid = $_COOKIE[$db_prefix."choccookie"];
     $page = $_POST['page'];
     
     if (sha1($sid) == $password) {

@@ -1,15 +1,15 @@
 <?php
     function loginform() { ?>
-<form method="post" action="index.php"><input name="sid" type="password"><button type="submit">Login</submit></form>
+<form method="post" action="index.php<?php echo "?id=".$_GET['id'] ?>"><input name="sid" type="password"><button type="submit">Login</submit></form>
     <?php }
 
     include '../config.php';
     include '../header.php';
-    $sid = $_COOKIE['aftcook'];
+    $sid = $_COOKIE[$db_prefix."choccookie"];
     if (sha1($sid) != $password) {
         $sid = $_POST['sid'];
         if (sha1($sid) == $password) {
-            setcookie("aftcook", $sid, time()+(7*24*60*60));
+            setcookie($db_prefix."choccookie", $sid, time()+(7*24*60*60));
             $_SESSION['sid'] = $sid;
         }
         else echo "Sorry, access denied!<br />";
