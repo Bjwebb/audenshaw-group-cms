@@ -145,7 +145,7 @@
                         $id = mysql_insert_id($con);
                         $add = true;
                     } else {
-                        mysql_query("UPDATE members
+                        mysql_query("UPDATE ".$db_prefix."members
                             SET firstName='$fn', lastName='$ln', position='$pos'
                             WHERE id=$id",$con);
                     }
