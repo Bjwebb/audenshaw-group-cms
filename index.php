@@ -13,7 +13,7 @@
         <meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
         <link rel="stylesheet" type="text/css" href="style<?php echo $css_suffix ?>.css" />
         <!--[if IE ]>
-        <link rel="stylesheet" type="text/css" href="ie_style.css" />
+        <link rel="stylesheet" type="text/css" href="ie_style<?php echo $css_suffix ?>.css" />
         <![endif]-->
         <script type="text/javascript" src="main.js"></script>
         <script type="text/javascript" src="<?php echo $img_serv; ?>list.js"></script>
