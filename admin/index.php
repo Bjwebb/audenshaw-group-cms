@@ -18,10 +18,6 @@
 ?>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="../style.css">
-        <!--[if IE ]>
-        <link rel="stylesheet" type="text/css" href="../ie_style.css">
-        <![endif]-->
         <link rel="stylesheet" type="text/css" href="style.css">
         <script type="text/javascript"><!--
             <?php if ($_GET['id']) echo "args = \"?id=" . $_GET['id'] . "\";\n";
