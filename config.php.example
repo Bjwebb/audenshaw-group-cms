@@ -7,4 +7,7 @@ $db_host = "localhost"; // Database host
 $db_name = "aft"; // Database username
 $db_pass = "password"; // Database password
 $img_serv = ""; // Image server, leave blank if kept locally
+$db_prefix = "";
+$css_suffix = "";
 ?>
+

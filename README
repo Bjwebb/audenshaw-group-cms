@@ -1,3 +1,5 @@
+********** About this Program **********
+
 ********** Copyright and Contact **********
 
 The php scripts that make up this website CMS - "This Program"
@@ -26,7 +28,8 @@ if anyone does do anything with this code.
 
 Copy config.php.example to config.php and change the details there
 to the correct ones for your sql server. You can then create the
-sql tables by going to mktables.php in your webbrowser.
+sql tables by going to setup.php in your webbrowser and filling in
+the fields.
 
 ********** Pictures *********
 
