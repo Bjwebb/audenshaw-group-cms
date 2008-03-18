@@ -1,4 +1,38 @@
 <?php
+function checkPass($user, $password) {
+    global $db_prefix_forum;
+    global $con;
+    $password = sha1($password);
+    $result = mysql_query("SELECT * FROM ".$db_prefix_forum."users WHERE name='$user' AND password='$password'",$con);
+    return mysql_fetch_array($result);
+}
+function navbox() {
+global $loggedIn;
+global $user;
+?><div class="box_right">
+<h2>Navigation</h2>
+<ul class="nav2">
+    <li class="nav2">
+        <a href=".">Home</a>
+    </li>
+    <li class="nav2">
+        <a href="forum.php">Forum</a>
+    </li>
+<?php if ($loggedIn) { ?>
+    <li class="nav2">
+        <?php echo $user; ?>
+    </li>
+    <li class="nav2">
+        <a href="forum.php?type=post&mode=logout">Logout</a>
+    </li>
+<?php } else { ?>
+    <li class="nav2">
+        <a href="forum.php?type=login">Log In</a>
+    </li>
+<?php } ?>
+</ul>
+</div>
+<?php }
 function showOther($type) {
     global $con;
     global $db_prefix;

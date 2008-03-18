@@ -4,7 +4,6 @@ $pages = true;
 $perPage = 10;
 include "config.php";
 include "header.php";
-$db_prefix_forum = $db_prefix . "forum_";
 /*
 "Describe yourself" user pages
 Logout button
@@ -23,6 +22,7 @@ mysql_select_db("$db_db", $con);
     <link rel="stylesheet" type="text/css" href="style<?php echo $css_suffix ?>.css" />
 </head>
 <body>
+    <div id="all">
     <div id="header">
         <h1><?php echo showOther("title"); ?></h1>
         <?php $sub = showOther("subtitle"); echo "<h2 id=\"sub\">".$sub."</h2>"; ?>
@@ -83,13 +83,6 @@ function newUser($user, $password) {
     global $con;
     $password = sha1($password);
     if (!mysql_query("INSERT INTO ".$db_prefix_forum."users(name, password, time) VALUES('$user', '$password', NOW())",$con)) echo mysql_error();
-}
-function checkPass($user, $password) {
-    global $db_prefix_forum;
-    global $con;
-    $password = sha1($password);
-    $result = mysql_query("SELECT * FROM ".$db_prefix_forum."users WHERE name='$user' AND password='$password'",$con);
-    return mysql_fetch_array($result);
 }
 function markRead($user, $post) {
     global $db_prefix_forum;
@@ -231,32 +224,14 @@ if ($type=='post') {
 
 // **************************************** Forum Header **************************************** ?>
 <h2>FORUM</h2>
-<ul class="nav2">
-    <li class="nav2">
-        <a href="?">Home</a>
-    </li>
-<?php if ($loggedIn) { ?>
-    <li class="nav2">
-        <?php echo $user; ?>
-    </li>
-    <li class="nav2">
-        <a href="?type=post&mode=logout">Logout</a>
-    </li>
-<?php } else { ?>
-    <li class="nav2">
-        <a href="?type=login">Log In</a>
-    </li>
-<?php } ?>
-</ul>
-<!--[if IE ]><br/><![endif]-->
 <?php
 // **************************************** Show post form ****************************************
-echo "<div style=\"color:red;\">$loginMessage</div>";
+if ($loginMessage) echo "<div style=\"color:red;\">$loginMessage</div>";
 if ($type=='edit') {
     if ($loggedIn || $allowGuest) {
 ?>
 <div class="text">
-<form name="form" action="<?php echo "?type=post&mode=$mode"; if ($mode == "reply" || $mode == "edit"){ echo "&thread=$thread"; } if ($mode == "edit") { echo "&$post"; } ?>" method="post">
+<form name="form" action="<?php echo "forum.php?type=post&mode=$mode"; if ($mode == "reply" || $mode == "edit"){ echo "&thread=$thread"; } if ($mode == "edit") { echo "&$post"; } ?>" method="post">
 <?php if ($mode == 'add') { ?>
 <div class="formentry"><span class="label">Title: </span> <span class="field"><input name="title" size="50" maxlength="50"></input></span></div>
 <?php } ?>
@@ -278,7 +253,7 @@ if ($type=='edit') {
 else if ($type == 'register') {
 ?>
 <div class="text">
-<form name="form" action="?type=post&mode=register" method="post" class="form">
+<form name="form" action="forum.php?type=post&mode=register" method="post" class="form">
     <div class="formentry"><span class="label">Username: </span> <span class="field"><input name="user" size="50" maxlength="50"></input></span></div>
     <div class="formentry"><span class="label">Password: </span> <span class="field"><input name="pass" size="50" maxlength="50" type="password"></input></span></div>
     <div class="formentry"><span class="label">Repeat password: </span> <span class="field"><input name="pass2" size="50" maxlength="50" type="password"></input></span></div>
@@ -291,8 +266,8 @@ else if ($type == 'register') {
 else if ($type == 'login') {
 ?>
 <div class="text">
-Here you can log into your forum account. If you do not have an account, the why not <a href="?type=register">register</a>.
-<form name="form" action="?type=post&mode=login" method="post" class="form">
+Here you can log into your forum account. If you do not have an account, the why not <a href="forum.php?type=register">register</a>.
+<form name="form" action="forum.php?type=post&mode=login" method="post" class="form">
     <div class="formentry"><span class="label">Username: </span> <span class="field"><input name="user" size="50" maxlength="50"></input></span></div>
     <div class="formentry"><span class="label">Password: </span> <span class="field"><input name="pass" size="50" maxlength="50" type="password"></input></span></div>
     <div class="formentry"><span class="label"></span><span class="field"><button type="submit" class="formbutton">Login</button></span></div>
@@ -322,7 +297,7 @@ while ($row = mysql_fetch_array($result)) {
 <tr class="row">
     <td class="read">Unread</td>
 <?php } ?>
-    <td class="post_title"><?php echo '<a href="?thread=' . $row[threadID] . '">' . $row['title']; ?></a></td>
+    <td class="post_title"><?php echo '<a href="forum.php?thread=' . $row[threadID] . '">' . $row['title']; ?></a></td>
     <td class="by"><?php echo "By " . $row['author'] . " at " . date("d/m/y H:i", strtotime($row['time'])); ?></td>
     <td class="replies"><?php $replies = countReplies($row['threadID']); echo $replies ?></td>
     <td class="last"><?php $row = mysql_fetch_array(mysql_query("SELECT * FROM ".$db_prefix_forum."posts WHERE threadID=" . $row['threadID'] . " ORDER BY postID DESC", $con)); echo "By " . $row['author'] . " at " . date("d/m/y H:i", strtotime($row['time'])); ?></td>
@@ -331,7 +306,7 @@ while ($row = mysql_fetch_array($result)) {
 
 <tr class="top-row">
     <td class="read"></td>
-    <td class="post_title"><a href="?type=edit&mode=add">Post New Thread</a></td>
+    <td class="post_title"><a href="forum.php?type=edit&mode=add">Post New Thread</a></td>
     <td class="by"></td>
     <td class="replies"></td>
     <td class="last"></td>
@@ -350,17 +325,17 @@ while ($row = mysql_fetch_array($result)) {
             if ($page == '') $page = 1;
             $numPages = ceil($row['COUNT(*)']/$perPage);
             if ($page > $numPages) { echo "Sorry, there are not that many pages, showing page one.<br/><br/>"; $page = 1; }
-            $buttons = "<ul class=\"nav2\"><li class=\"nav2\"><a href=\"?thread=$thread&page=1\">&larr;&mdash;&mdash;</a></li><li class=\"nav2\">";
+            $buttons = "<ul class=\"post-nav\"><li class=\"nav2\"><a href=\"forum.php?thread=$thread&page=1\">&larr;&mdash;&mdash;</a></li><li class=\"post-nav\">";
             
-            if ($page-1 > 0) $buttons .= "<a href=\"?thread=$thread&page=" . ($page-1) . "\">Previous</a>";
+            if ($page-1 > 0) $buttons .= "<a href=\"forum.php?thread=$thread&page=" . ($page-1) . "\">Previous</a>";
             else $buttons .= "Previous";
             
-            $buttons .= "</li><li class=\"nav2\">";
+            $buttons .= "</li><li class=\"post-nav\">";
             
-            if ($page < $row['COUNT(*)']/$perPage) $buttons .= "<a href=\"?thread=$thread&page=" . ($page+1) . "\">Next</a>";
+            if ($page < $row['COUNT(*)']/$perPage) $buttons .= "<a href=\"forum.php?thread=$thread&page=" . ($page+1) . "\">Next</a>";
             else $buttons .= "Next";
             
-            $buttons .= "</li><li class=\"nav2\"><a href=\"?thread=$thread&page=$numPages\">&mdash;&mdash;&rarr;</a></ul>";
+            $buttons .= "</li><li class=\"post-nav\"><a href=\"forum.php?thread=$thread&page=$numPages\">&mdash;&mdash;&rarr;</a></ul>";
             echo $buttons;
         }
         echo "<div class=\"text\" style=\"margin: 20 30;\">";
@@ -377,7 +352,7 @@ while ($row = mysql_fetch_array($result)) {
             if  ($i == $perPage) break;
         }
 ?>
-<a href="?<?php echo "type=edit&mode=reply&thread=$thread" ?>">Reply</a>
+<a href="forum.php?<?php echo "type=edit&mode=reply&thread=$thread" ?>">Reply</a>
 </div>
 <?php if ($pages) { echo $buttons; } } } 
 
@@ -386,12 +361,15 @@ while ($row = mysql_fetch_array($result)) {
 </div>
 
 <div id="right">
+<?php navbox(); ?>
 <div class="box_right">
+<h2>Stats</h2>
 <ul class="forum">
 <li class="forum">Threads: <?php echo countThreads(); ?></li>
 <li class="forum">Posts: <?php echo countPosts(); ?></li>
 <li class="forum">Users: <?php echo countUsers(); ?></li>
 </ul>
+</div>
 </div>
 </div>
 </div>
