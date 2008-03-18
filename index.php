@@ -31,7 +31,7 @@
             --></script>
             <div id="header">
                 <h1><?php echo showOther("title"); ?></h1>
-                <?php $sub = showOther("subtitle"); echo "<h2 style=\"color:white;\">".$sub."</h2>"; ?>
+                <?php $sub = showOther("subtitle"); echo "<h2 id=\"sub\">".$sub."</h2>"; ?>
             </div>
             <div id="content">
                 <div id="left">
