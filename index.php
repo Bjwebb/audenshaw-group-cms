@@ -187,6 +187,7 @@ alt="Valid XHTML 1.1" height="31" width="88" /></a>
                 <div id="middle">
                 </div>
                 <div id="right">
+<?php /* ?>
                     <div id="facebook" class="box_right">
                     <div id="facebook2" class="box_right_inner">
                         <h2>Social Networking</h2>
@@ -210,6 +211,7 @@ alt="Valid XHTML 1.1" height="31" width="88" /></a>
                         </ul>
                     </div>
                     </div>
+<?php */ ?>
                     <div id="members" class="box_right">
                     <div id="members2" class="box_right_inner">
                         <h2>Members</h2>
