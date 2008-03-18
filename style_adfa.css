@@ -66,6 +66,9 @@ li.ajaxy {
 #right {
     width: 300px;
 }
+#forum #right {
+    width: 200px;
+}
 .box_left, .box_right {
     margin-top: 10px;
     padding: 0px;

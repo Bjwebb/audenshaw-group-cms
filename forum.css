@@ -1,0 +1,122 @@
+a {
+    color: #0000FF;
+}
+a:hover {
+    color: #9999FF;
+}
+a:visited {
+    color: #0000FF;
+}
+a:visited:hover {
+    color: #9999FF;
+}
+p,h2,div,ul {
+    font-family: sans-serif;
+}
+h1 {
+    font-family: serif;
+    font-size: 300%;
+    margin: 0 auto;
+    padding: 0;
+}
+div.sub {
+    margin: 0 auto 10 auto;
+}
+h2 {
+    margin: 10 5 10 5;
+}
+
+
+ul.nav1, ul.nav2 {
+    display: table;
+    padding: 0;
+    margin: 0 auto;
+    border: none;
+    list-style-type: none;
+}
+ul.nav1 {
+    margin: 10 auto;
+}
+ul.nav2 {
+    margin: 10 auto;
+}
+li.nav1, li.nav2, li.nav1hover, li.nav2hover {
+    display: table-cell;
+    border: thin dashed black;
+    text-align: center;
+}
+li.nav1, li.nav1hover {
+    width: 150px;
+    font-size: 150%;
+}
+li.nav2, li.nav2hover {
+    width: 100px;
+    text-align: center;
+}
+li.nav1:hover, li.nav1hover {
+    background-color: #CCFFCC;
+}
+
+li.nav2:hover, li.nav2hover {
+    background-color: #FFFFCC;
+}
+
+
+div.image {
+    margin-bottom: 10;
+}
+div.text {
+    margin: 10 50;
+    text-align: left;
+}
+form {
+    display: table;
+}
+div.formentry {
+    display: table-row;
+}
+span.label {
+    display: table-cell;
+    vertical-align: top;
+}
+span.field {
+    display: table-cell
+}
+.formbutton {
+    float: right;
+}
+
+.table {
+    border: 2px solid black;
+    border-spacing: 0px;
+    display: table;
+    text-align: center;
+}
+.top-row, .row, .row-read {
+    display: table-row;
+    border-spacing: 0px;
+}
+.top-row {
+    font-weight: bold;
+    background-color: #CCFFCC;
+}
+.row-read {
+    background-color: #FFFFEE;
+}
+.read, .post_title, .by, .replies, .last {
+    display: table-cell;
+    border: 0.5px solid black;
+}
+.post_title {
+    width: 30%;
+}
+tr.row:hover, tr.row-read:hover, tr.rowhover, tr.row-readhover {
+    background-color: #FFFFCC;
+}
+ul.forum {
+    margin: 20px auto 0px auto;
+    list-style-type: none;
+}
+li.forum {
+    text-align: center;
+}
