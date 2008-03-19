@@ -1,4 +1,39 @@
 <?php
+function checkPass($user, $password) {
+    global $db_prefix_forum;
+    global $con;
+    $password = sha1($password);
+    $result = mysql_query("SELECT * FROM ".$db_prefix_forum."users WHERE name='$user' AND password='$password'",$con);
+    return mysql_fetch_array($result);
+}
+function navbox() {
+global $loggedIn;
+global $user;
+global $userID;
+?><div class="box_right">
+<h2>Navigation</h2>
+<ul class="nav2">
+    <li class="nav2">
+        <a href=".">Home</a>
+    </li>
+    <li class="nav2">
+        <a href="forum.php">Forum</a>
+    </li>
+<?php if ($loggedIn) { ?>
+    <li class="nav2">
+        <?php echo "<a href=\"forum.php?type=user&userid=$userID\">$user</a>"; ?>
+    </li>
+    <li class="nav2">
+        <a href="forum.php?type=post&mode=logout">Logout</a>
+    </li>
+<?php } else { ?>
+    <li class="nav2">
+        <a href="forum.php?type=login">Log In</a>
+    </li>
+<?php } ?>
+</ul>
+</div>
+<?php }
 function showOther($type) {
     global $con;
     global $db_prefix;
@@ -133,14 +168,16 @@ function memList() {
         echo "</li>\n";
     }
 }
-function adminMembers() { ?>
+function adminMembers() { /* ?>
         <h2>Members</h2>
         <ul id="memlist">
         <?php memList(); ?>
         </ul>
         <div id="memadd"><button type="button" onClick="editMem('add')">Add New Member</button></div>
-<?php }
-function adminComments() {
+<?php */
+    echo "<br />Members are now automatically listed from all those people with satuses other than non-member in the forums.";
+}
+function adminComments() { /*
     global $con;
     global $db_prefix;
     sqlcon();?>
@@ -153,15 +190,16 @@ function adminComments() {
                 echo "<b>" . $row['name'] . "</b><br />";
                 echo nl2br($row['comment']) . "<br />";
                 echo "<form><button type=\"button\" onClick=\"delCom($i)\">Delete</button></form></div>\n";
-            }
+            } */
+    echo "<br />User the forum instead of comments.";
 }
 function adminOther() {
     global $con;
     global $db_prefix;
     sqlcon(); ?>
-        <h2>Other</h2>
+        <h2>Links</h2>
         <?php
-            $types = Array('social', 'contact', 'links');
+            $types = Array('links');
             for ($j=0; $j<count($types); $j++) {
                 $type = $types[$j];
                 echo "<ul id=\"oth$type"."list\">";

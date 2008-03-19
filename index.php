@@ -6,6 +6,18 @@
       die('Could not connect: ' . mysql_error());
     }
     if (mysql_select_db($db_db, $con)); else die(mysql_error()); 
+session_start(); 
+$user = $_SESSION['user'];
+$result = mysql_query("SELECT userID FROM ".$db_prefix_forum."users WHERE name='$user'");
+$row = mysql_fetch_array($result);
+$userID = $row['userID'];
+$pass = $_SESSION['password'];
+if (!isset($_SESSION['user']) || !checkPass($user, $pass)) {
+    $user = "Guest";
+    $loggedIn = false;
+} else {
+    $loggedIn = true;
+}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
@@ -31,7 +43,7 @@
             --></script>
             <div id="header">
                 <h1><?php echo showOther("title"); ?></h1>
-                <?php $sub = showOther("subtitle"); echo "<h2 id=\"sub\">".$sub."</h2>"; ?>
+                <?php $sub = showOther("subtitle"); echo "<h2 style=\"color:white;\">".$sub."</h2>"; ?>
             </div>
             <div id="content">
                 <div id="left">
@@ -138,7 +150,7 @@ echo "</ul><script type=\"text/javascript\"><!--\ninit($length); document.write(
                         </div>
                     </div>
                     </div>
-                    
+<?php /* ?>                    
                     <div id="comments" class="box_left">
                     <div id="comments2" class="box_left_inner">
                         <h2>Comments &amp; Ideas</h2>
@@ -165,7 +177,7 @@ echo "</ul><script type=\"text/javascript\"><!--\ninit($length); document.write(
                         </div>
                     </div>
                     </div>
-                    
+<?php */ ?>
                     <div id="footer" class="box_left">
                     <div id="footer2" class="box_left_inner">
 <div style="float:right"><p><a href="http://www.freedomain.co.nr/">
@@ -187,6 +199,8 @@ alt="Valid XHTML 1.1" height="31" width="88" /></a>
                 <div id="middle">
                 </div>
                 <div id="right">
+                <?php navbox() ?>
+<?php /* ?>
                     <div id="facebook" class="box_right">
                     <div id="facebook2" class="box_right_inner">
                         <h2>Social Networking</h2>
@@ -210,12 +224,13 @@ alt="Valid XHTML 1.1" height="31" width="88" /></a>
                         </ul>
                     </div>
                     </div>
+<?php */ ?>
                     <div id="members" class="box_right">
                     <div id="members2" class="box_right_inner">
                         <h2>Members</h2>
                         <ul>
 <?php
-if ($result = mysql_query("SELECT * FROM `".$db_prefix."members` WHERE position!='' ORDER BY id",$con)); else die(mysql_error());
+/*if ($result = mysql_query("SELECT * FROM `".$db_prefix."members` WHERE position!='' ORDER BY id",$con)); else die(mysql_error());
 $members = Array ();
 $i = 0;
 while ($row = mysql_fetch_array($result)) {
@@ -235,6 +250,14 @@ for ($i=0; $i<count($members); $i++) {
     if ($members[$i][1])
         echo "<span class=\"job\"> - ".$members[$i][1]."</span>";
     echo "</li>";
+}*/
+
+$userid = $_GET['userid'];
+$result = mysql_query("SELECT * FROM ".$db_prefix_forum."users WHERE state!='non'");
+while ($row = mysql_fetch_array($result)) {
+    echo "<li>" . $row['firstName']." ".$row['lastName'];
+    if ($members[$i][1])
+        echo "<span class=\"job\"> - ".$row['position']."</span>";
 }
 ?>
                         </ul>

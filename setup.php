@@ -3,6 +3,7 @@ include 'config.php';
 include 'header.php';
 
 $title = $_POST['title'];
+$subtitle = $_POST['subtitle'];
 $image = $_POST['image'];
 $pics = $_POST['pics'];
 
@@ -58,6 +59,7 @@ if ($title) {
     
     upOther("about","Insert a short description of your group here."); 
     upOther("title",$title);
+    upOther("subtitle",$subtitle);
     upOther("image",$image);
     upOther("showPictures",$pics);
 }
@@ -69,6 +71,7 @@ else {
 
 <form action="setup.php" method="post">
     Title: <input type="text" name="title" /><br />
+    Subtitle: <input type="text" name="subtitle" /><br />
     Image URL: <input type="text" name="image" /><br />
     Show Pictures? (TRUE or FALSE) <input type="text" name="pics" /><br />
     <button>Create!</button>
