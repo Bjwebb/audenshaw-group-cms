@@ -4,9 +4,6 @@ $pages = true;
 $perPage = 10;
 include "config.php";
 include "header.php";
-/*
-"Describe yourself" user pages
-*/
 ?>
 <?php session_start(); 
 $con = mysql_connect($db_host,$db_name,$db_pass);
@@ -316,6 +313,7 @@ else if ($type == 'user') {
         <div class="formentry"><span class="label">First Name: </span> <span class="field"><input name="firstName" size="50" maxlength="50" value="<?php echo $row['firstName'] ?>"></input></span></div>
         <div class="formentry"><span class="label">First Name: </span> <span class="field"><input name="lastName" size="50" maxlength="50" value="<?php echo $row['lastName'] ?>"></input></span></div>
     <div class="formentry"><span class="label">Status:</span><select name="state">
+    <option value="non"<?php if ($row['state'] == "non") echo " selected" ?>>Non Member</option>
     <option value="hat"<?php if ($row['state'] == "hat") echo " selected" ?>>HardHat</option>
     <option value="fox"<?php if ($row['state'] == "fox") echo " selected" ?>>Fox</option>
     <option value="peng"<?php if ($row['state'] == "peng") echo "selected" ?>>Penguin</option>

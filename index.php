@@ -150,7 +150,7 @@ echo "</ul><script type=\"text/javascript\"><!--\ninit($length); document.write(
                         </div>
                     </div>
                     </div>
-                    
+<?php /* ?>                    
                     <div id="comments" class="box_left">
                     <div id="comments2" class="box_left_inner">
                         <h2>Comments &amp; Ideas</h2>
@@ -177,7 +177,7 @@ echo "</ul><script type=\"text/javascript\"><!--\ninit($length); document.write(
                         </div>
                     </div>
                     </div>
-                    
+<?php */ ?>
                     <div id="footer" class="box_left">
                     <div id="footer2" class="box_left_inner">
 <div style="float:right"><p><a href="http://www.freedomain.co.nr/">
@@ -230,7 +230,7 @@ alt="Valid XHTML 1.1" height="31" width="88" /></a>
                         <h2>Members</h2>
                         <ul>
 <?php
-if ($result = mysql_query("SELECT * FROM `".$db_prefix."members` WHERE position!='' ORDER BY id",$con)); else die(mysql_error());
+/*if ($result = mysql_query("SELECT * FROM `".$db_prefix."members` WHERE position!='' ORDER BY id",$con)); else die(mysql_error());
 $members = Array ();
 $i = 0;
 while ($row = mysql_fetch_array($result)) {
@@ -250,6 +250,14 @@ for ($i=0; $i<count($members); $i++) {
     if ($members[$i][1])
         echo "<span class=\"job\"> - ".$members[$i][1]."</span>";
     echo "</li>";
+}*/
+
+$userid = $_GET['userid'];
+$result = mysql_query("SELECT * FROM ".$db_prefix_forum."users WHERE state!='non'");
+while ($row = mysql_fetch_array($result)) {
+    echo "<li>" . $row['firstName']." ".$row['lastName'];
+    if ($members[$i][1])
+        echo "<span class=\"job\"> - ".$row['position']."</span>";
 }
 ?>
                         </ul>
