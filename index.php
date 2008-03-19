@@ -8,6 +8,9 @@
     if (mysql_select_db($db_db, $con)); else die(mysql_error()); 
 session_start(); 
 $user = $_SESSION['user'];
+$result = mysql_query("SELECT userID FROM ".$db_prefix_forum."users WHERE name='$user'");
+$row = mysql_fetch_array($result);
+$userID = $row['userID'];
 $pass = $_SESSION['password'];
 if (!isset($_SESSION['user']) || !checkPass($user, $pass)) {
     $user = "Guest";

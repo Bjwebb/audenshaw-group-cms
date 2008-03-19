@@ -6,7 +6,6 @@ include "config.php";
 include "header.php";
 /*
 "Describe yourself" user pages
-Logout button
 */
 ?>
 <?php session_start(); 
@@ -155,6 +154,9 @@ if (!$created) {
 }
 mysql_select_db("$db_db", $con);
 $user = $_SESSION['user'];
+$result = mysql_query("SELECT userID FROM ".$db_prefix_forum."users WHERE name='$user'");
+$row = mysql_fetch_array($result);
+$userID = $row['userID'];
 $pass = $_SESSION['password'];
 if (!isset($_SESSION['user']) || !checkPass($user, $pass)) {
     $user = "Guest";
@@ -196,6 +198,27 @@ if ($type=='post') {
         $user = '';
         $pass = '';
         $loggedIn = false;
+    }
+    else if ($mode=='user') {
+        mysql_query("UPDATE ".$db_prefix_forum."users
+        SET firstName='".$_POST['firstName']."',
+        lastName='".$_POST['lastName']."',
+        state='".$_POST['state']."'
+        WHERE userID=".$_GET['userid'],$con) or die(mysql_error());
+        $pass = $_POST['pass'];
+        $pass2 = $_POST['pass2'];
+        if ($pass != '' && $pass2 != '') {
+            if ($pass == $pass2) {
+                mysql_query("UPDATE ".$db_prefix_forum."users
+                SET password='".sha1($pass)."'
+                WHERE userID=".$_GET['userid'],$con) or die(mysql_error());
+            }
+            else {
+                echo "Passwords do not match.";
+                $mode = "edit";
+            }
+        }
+        $type = "user";
     }
     // User login/register
     else {
@@ -274,6 +297,45 @@ Here you can log into your forum account. If you do not have an account, the why
 </form>
 </div>
 <?php
+}
+
+// **************************************** User Functions *************************************
+
+else if ($type == 'user') {
+?><div style="margin:10px;"><?php
+    $userid = $_GET['userid'];
+    $result = mysql_query("SELECT * FROM ".$db_prefix_forum."users WHERE userID=$userid");
+    $row = mysql_fetch_array($result);
+    if ($mode == 'edit') {
+    if ($user == $row['name']) {
+            echo "Editing profile for ". $row['name'];
+    ?><form name="form" action="forum.php?type=post&mode=user&userid=<?php echo $userid ?>" method="post" class="form">
+        <div class="formentry"><span class="label">Change Password: </span> <span class="field"><input name="pass" size="50" maxlength="50" type="password"></input></span></div>
+        <div class="formentry"><span class="label">Repeat password: </span> <span class="field"><input name="pass2" size="50" maxlength="50" type="password"></input></span></div>
+        <br />
+        <div class="formentry"><span class="label">First Name: </span> <span class="field"><input name="firstName" size="50" maxlength="50" value="<?php echo $row['firstName'] ?>"></input></span></div>
+        <div class="formentry"><span class="label">First Name: </span> <span class="field"><input name="lastName" size="50" maxlength="50" value="<?php echo $row['lastName'] ?>"></input></span></div>
+    <div class="formentry"><span class="label">Status:</span><select name="state">
+    <option value="hat"<?php if ($row['state'] == "hat") echo " selected" ?>>HardHat</option>
+    <option value="fox"<?php if ($row['state'] == "fox") echo " selected" ?>>Fox</option>
+    <option value="peng"<?php if ($row['state'] == "peng") echo "selected" ?>>Penguin</option>
+    <option value="gnu"<?php if ($row['state'] == "gnu") echo " selected" ?>>GNU</option>
+    </select></div>
+        <div class="formentry"><span class="label"></span><span class="field"><button type="submit" class="formbutton">Change</button></span></div>
+    </form>
+    <?php }
+    else echo "Access denied!";
+    }
+    else {
+         if ($user == $row['name']) echo "<a href=\"forum.php?type=user&mode=edit&userid=$userid\">edit</a>";
+         echo "<br/>Username: " . $row['name'];
+         echo "<br/>First Name: " . $row['firstName'];
+         echo "<br/>Last Name: " . $row['lastName'];
+         echo "<br/>Joined: " . $row['time'];
+         if ($row['position']) echo "<br/>Position: " . $row['position'];
+         echo "<br/>Status: " . $row['state'];
+    }
+?></div><?php
 }
 
 // **************************************** Forum Index ****************************************

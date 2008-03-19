@@ -9,6 +9,7 @@ function checkPass($user, $password) {
 function navbox() {
 global $loggedIn;
 global $user;
+global $userID;
 ?><div class="box_right">
 <h2>Navigation</h2>
 <ul class="nav2">
@@ -20,7 +21,7 @@ global $user;
     </li>
 <?php if ($loggedIn) { ?>
     <li class="nav2">
-        <?php echo $user; ?>
+        <?php echo "<a href=\"forum.php?type=user&userid=$userID\">$user</a>"; ?>
     </li>
     <li class="nav2">
         <a href="forum.php?type=post&mode=logout">Logout</a>
