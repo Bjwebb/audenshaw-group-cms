@@ -243,7 +243,7 @@ if ($type=='post') {
 }
 
 // **************************************** Forum Header **************************************** ?>
-<h2>FORUM</h2>
+<h2><a href="forum.php" style="color: white;">FORUM</a></h2>
 <?php
 // **************************************** Show post form ****************************************
 if ($loginMessage) echo "<div style=\"color:red;\">$loginMessage</div>";
