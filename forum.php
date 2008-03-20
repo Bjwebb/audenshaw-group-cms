@@ -218,21 +218,25 @@ if ($type=='post') {
     else {
         $user = $_POST['user'];
         $pass = $_POST['pass'];
+        if ($mode=='register') {
+            $pass2 = $_POST['pass2'];
+            if ($pass != $pass2) { $loginMessage = "Passwords do not match!"; $type = 'register'; }
+            else {
+                newUser($user, $pass);
+                $mode = 'login';
+            }
+        }
         if ($mode=='login') {
             if (checkPass($user, $pass)) {
                 $_SESSION['user'] = $user;
                 $_SESSION['password'] = $pass;
                 $loggedIn = true;
+                $result = mysql_query("SELECT userID FROM ".$db_prefix_forum."users WHERE name='$user'");
+                $row = mysql_fetch_array($result);
+                $userID = $row['userID'];
             } else {
                 $loginMessage = "Sorry, incorrect username and/or password.";
                 $type = login;
-            }
-        }
-        else if ($mode=='register') {
-            $pass2 = $_POST['pass2'];
-            if ($pass != $pass2) { $loginMessage = "Passwords do not match!"; $type = 'register'; }
-            else {
-                newUser($user, $pass);
             }
         }
     }
