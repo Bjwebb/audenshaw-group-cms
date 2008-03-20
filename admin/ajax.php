@@ -7,13 +7,16 @@
       die('Could not connect: ' . mysql_error());
     }
     if (mysql_select_db($db_db, $con)); else die(mysql_error());
-    
+
+
     $id = $_POST['id'];
     $type = $_POST['type'];
-    $sid = $_COOKIE[$db_prefix."choccookie"];
+//    $sid = $_COOKIE[$db_prefix."choccookie"];
     $page = $_POST['page'];
     
-    if (sha1($sid) == $password) {
+//    if (sha1($sid) == $password) {
+    session_start();
+    if (auth() && userPos($userID) == 'admin') {
         if ($page != '') {
             switch ($page) {
                 case 1:

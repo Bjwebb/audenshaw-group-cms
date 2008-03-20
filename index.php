@@ -7,17 +7,7 @@
     }
     if (mysql_select_db($db_db, $con)); else die(mysql_error()); 
 session_start(); 
-$user = $_SESSION['user'];
-$result = mysql_query("SELECT userID FROM ".$db_prefix_forum."users WHERE name='$user'");
-$row = mysql_fetch_array($result);
-$userID = $row['userID'];
-$pass = $_SESSION['password'];
-if (!isset($_SESSION['user']) || !checkPass($user, $pass)) {
-    $user = "Guest";
-    $loggedIn = false;
-} else {
-    $loggedIn = true;
-}
+auth();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">

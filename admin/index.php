@@ -1,11 +1,14 @@
 <?php
-    function loginform() { ?>
+    function loginform() { /* ?>
 <form method="post" action="index.php<?php echo "?id=".$_GET['id'] ?>"><input name="sid" type="password"><button type="submit">Login</submit></form>
-    <?php }
+    <?php */
+        echo "Sorry, access denied - you must login with an admin account (on the forums) before you can use this page.";
+    }
 
     include '../config.php';
     include '../header.php';
-    $sid = $_COOKIE[$db_prefix."choccookie"];
+/*
+    $sid = $_COOKIE[$db_prefix."tempcookie"];
     if (sha1($sid) != $password) {
         $sid = $_POST['sid'];
         if (sha1($sid) == $password) {
@@ -15,6 +18,14 @@
         else echo "Sorry, access denied!<br />";
     }
     if (sha1($sid) == $password) {
+*/
+    session_start();
+    $con = mysql_connect($db_host,$db_name,$db_pass);
+    if (!$con) {
+      die('Could not connect: ' . mysql_error());
+    }
+    mysql_select_db($db_db, $con) or die(mysql_error());
+    if (auth() && userPos($userID) == 'admin') {
 ?>
 <html>
     <head>
@@ -29,7 +40,8 @@
         </script>
     </head>
     <body>
-        <h1 style="margin-bottom: 10px">Admin</h1>
+        <div style="magin-bottom: 0px"><a href="..">&larr; Back to site</a></div>
+        <h1 style="margin-top: 0px; margin-bottom: 10px">Admin</h1>
         <div>
             <span class="tab"><a href="javascript:tab(1)">About</a></span>
             <span class="tab"><a href="javascript:tab(2)">News</a></span>

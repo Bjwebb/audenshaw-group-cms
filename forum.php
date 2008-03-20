@@ -156,17 +156,7 @@ if (!$created) {
     newThread("Welcome", "Webbtest", "Welcome to the BAIComic forum. Feel free to reply to this post and say hi.");
 }
 mysql_select_db("$db_db", $con);
-$user = $_SESSION['user'];
-$result = mysql_query("SELECT userID FROM ".$db_prefix_forum."users WHERE name='$user'");
-$row = mysql_fetch_array($result);
-$userID = $row['userID'];
-$pass = $_SESSION['password'];
-if (!isset($_SESSION['user']) || !checkPass($user, $pass)) {
-    $user = "Guest";
-    $loggedIn = false;
-} else {
-    $loggedIn = true;
-}
+auth();
 
 // Get url variables
 $thread = $_GET['thread'];

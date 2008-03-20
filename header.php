@@ -1,4 +1,31 @@
 <?php
+function auth() {
+    global $user;
+    global $pass;
+    global $userID;
+    global $loggedIn;
+    global $db_prefix_forum;
+    global $con;
+    $user = $_SESSION['user'];
+    $result = mysql_query("SELECT userID FROM ".$db_prefix_forum."users WHERE name='$user'");
+    $row = mysql_fetch_array($result);
+    $userID = $row['userID'];
+    $pass = $_SESSION['password'];
+    if (!isset($_SESSION['user']) || !checkPass($user, $pass)) {
+        $user = "Guest";
+        $loggedIn = false;
+    } else {
+        $loggedIn = true;
+    }
+    return $loggedIn;
+}
+function userPos($userid) {
+    global $db_prefix_forum;
+    global $con;
+    $result = mysql_query("SELECT * FROM ".$db_prefix_forum."users WHERE userID='$userid'");
+    $row = mysql_fetch_array($result);
+    return $row['position'];
+}
 function checkPass($user, $password) {
     global $db_prefix_forum;
     global $con;
@@ -23,6 +50,11 @@ global $userID;
     <li class="nav2">
         <?php echo "<a href=\"forum.php?type=user&userid=$userID\">$user</a>"; ?>
     </li>
+    <?php if (userPos($userID) == 'admin') { ?>
+    <li class="nav2">
+        <a href="admin/">Admin</a>
+    </li>
+    <?php } ?>
     <li class="nav2">
         <a href="forum.php?type=post&mode=logout">Logout</a>
     </li>
