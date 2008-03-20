@@ -196,6 +196,7 @@ if ($type=='post') {
         mysql_query("UPDATE ".$db_prefix_forum."users
         SET firstName='".$_POST['firstName']."',
         lastName='".$_POST['lastName']."',
+        email='".$_POST['email']."',
         state='".$_POST['state']."'
         WHERE userID=".$_GET['userid'],$con) or die(mysql_error());
         $pass = $_POST['pass'];
@@ -308,10 +309,12 @@ else if ($type == 'user') {
         <br />
         <div class="formentry"><span class="label">First Name: </span> <span class="field"><input name="firstName" size="50" maxlength="50" value="<?php echo $row['firstName'] ?>"></input></span></div>
         <div class="formentry"><span class="label">First Name: </span> <span class="field"><input name="lastName" size="50" maxlength="50" value="<?php echo $row['lastName'] ?>"></input></span></div>
+        <div class="formentry"><span class="label">E-mail address: </span> <span class="field"><input name="email" size="50" maxlength="50" value="<?php echo $row['email'] ?>"></input></span></div>
     <div class="formentry"><span class="label">Status:</span><select name="state">
     <option value="non"<?php if ($row['state'] == "non") echo " selected" ?>>Non Member</option>
     <option value="hat"<?php if ($row['state'] == "hat") echo " selected" ?>>HardHat</option>
     <option value="fox"<?php if ($row['state'] == "fox") echo " selected" ?>>Fox</option>
+    <option value="gull"<?php if ($row['state'] == "gull") echo " selected" ?>>Seagull</option>
     <option value="peng"<?php if ($row['state'] == "peng") echo "selected" ?>>Penguin</option>
     <option value="gnu"<?php if ($row['state'] == "gnu") echo " selected" ?>>GNU</option>
     </select></div>
