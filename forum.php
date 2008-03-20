@@ -44,6 +44,12 @@ function countThreads() {
     $row = mysql_fetch_array($result);
     return $row['COUNT(*)'];
 }
+function maxThread() {
+    global $db_prefix_forum;
+    $result = mysql_query("SELECT MAX(threadID) FROM ".$db_prefix_forum."threads");
+    $row = mysql_fetch_array($result);
+    return $row['MAX(threadID)'];
+}
 function countPosts() {
     global $db_prefix_forum;
     $result = mysql_query("SELECT COUNT(*) FROM ".$db_prefix_forum."posts");
@@ -68,9 +74,9 @@ function newThread($name, $user, $content) {
     global $con;
     if (!mysql_query("INSERT INTO ".$db_prefix_forum."threads(title, author, time) VALUES('$name', '$user', NOW())",$con)) echo mysql_error();
 
-    $threadCount = countThreads();
+    $maxThread = maxThread();
 
-    if (!mysql_query("INSERT INTO ".$db_prefix_forum."posts(threadID, content, author, time) VALUES('$threadCount', '$content', '$user', NOW())",$con)) echo mysql_error();
+    if (!mysql_query("INSERT INTO ".$db_prefix_forum."posts(threadID, content, author, time) VALUES('$maxThread', '$content', '$user', NOW())",$con)) echo mysql_error();
 }
 function newPost($thread, $user, $content) {
     global $db_prefix_forum;
@@ -96,8 +102,10 @@ function hasRead($user, $thread) {
     global $db_prefix_forum;
     // Applies to threads
     global $con;
+//     echo $thread;
     $result = mysql_query("SELECT MAX(postID) FROM ".$db_prefix_forum."posts WHERE threadID=$thread",$con);
     $row = mysql_fetch_array($result);
+//     print_r($row);
     $result2 = mysql_query("SELECT * FROM ".$db_prefix_forum."hasRead WHERE postID=".$row['MAX(postID)']." AND user='$user'",$con);
     echo mysql_error();
     return mysql_fetch_array($result2);
@@ -216,7 +224,7 @@ if ($type=='post') {
     }
     // User login/register
     else {
-        $user = $_POST['user'];
+        $user = strtolower($_POST['user']);
         $pass = $_POST['pass'];
         if ($mode=='register') {
             $pass2 = $_POST['pass2'];
@@ -351,7 +359,7 @@ else if ($type == '' || $type == 'view') {
     <td class="last">Last post</td>
 </tr>
 
-<?php $result = mysql_query("SELECT * FROM ".$db_prefix_forum."threads");
+<?php $result = mysql_query("SELECT * FROM ".$db_prefix_forum."threads ORDER BY time");
 while ($row = mysql_fetch_array($result)) { 
     if ($loggedIn && hasRead($user, $row['threadID'])) { ?>
 <tr class="row-read">
@@ -361,9 +369,9 @@ while ($row = mysql_fetch_array($result)) {
     <td class="read">Unread</td>
 <?php } ?>
     <td class="post_title"><?php echo '<a href="forum.php?thread=' . $row[threadID] . '">' . $row['title']; ?></a></td>
-    <td class="by"><?php echo "By " . $row['author'] . " at " . date("d/m/y H:i", strtotime($row['time'])); ?></td>
+    <td class="by"><?php echo "By " . profileLink($row['author']) . " at " . date("d/m/y H:i", strtotime($row['time'])); ?></td>
     <td class="replies"><?php $replies = countReplies($row['threadID']); echo $replies ?></td>
-    <td class="last"><?php $row = mysql_fetch_array(mysql_query("SELECT * FROM ".$db_prefix_forum."posts WHERE threadID=" . $row['threadID'] . " ORDER BY postID DESC", $con)); echo "By " . $row['author'] . " at " . date("d/m/y H:i", strtotime($row['time'])); ?></td>
+    <td class="last"><?php $row = mysql_fetch_array(mysql_query("SELECT * FROM ".$db_prefix_forum."posts WHERE threadID=" . $row['threadID'] . " ORDER BY postID DESC", $con)); echo "By " . profileLink($row['author']) . " at " . date("d/m/y H:i", strtotime($row['time'])); ?></td>
 </tr>
 <?php } ?>
 

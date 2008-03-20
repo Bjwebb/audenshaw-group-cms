@@ -1,4 +1,13 @@
 <?php
+function profileLink($username) {
+    global $db_prefix_forum;
+    global $con;
+    if ($result = mysql_query("SELECT userID FROM ".$db_prefix_forum."users WHERE name='$username'")) {
+        $row = mysql_fetch_array($result);
+        return "<a href=\"forum.php?type=user&userid=" . $row['userID'] . "\">$username</a>";
+    }
+    else return $username;
+}
 function auth() {
     global $user;
     global $pass;
