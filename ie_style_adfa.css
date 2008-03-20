@@ -10,7 +10,8 @@ body {
 #left, #right, #middle {
     position: absolute;
     display: inline;
-    top: 60px;
+/*  60px for title only 90px with subtitle */
+    top: 90px;
 }
 #left {
     left: 50px;
