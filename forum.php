@@ -305,7 +305,7 @@ else if ($type == 'user') {
     $result = mysql_query("SELECT * FROM ".$db_prefix_forum."users WHERE userID=$userid");
     $row = mysql_fetch_array($result);
     if ($mode == 'edit') {
-    if ($user == $row['name']) {
+    if (strcasecmp($user, $row['name']) == 0) {
             echo "Editing profile for ". $row['name'];
     ?><form name="form" action="forum.php?type=post&mode=user&userid=<?php echo $userid ?>" method="post" class="form">
         <div class="formentry"><span class="label">Change Password: </span> <span class="field"><input name="pass" size="50" maxlength="50" type="password"></input></span></div>
@@ -328,7 +328,7 @@ else if ($type == 'user') {
     else echo "Access denied!";
     }
     else {
-         if ($user == $row['name']) echo "<a href=\"forum.php?type=user&mode=edit&userid=$userid\">edit</a>";
+        if (strcasecmp($user, $row['name']) == 0) echo "<a href=\"forum.php?type=user&mode=edit&userid=$userid\">edit</a>";
          echo "<br/>Username: " . $row['name'];
          echo "<br/>First Name: " . $row['firstName'];
          echo "<br/>Last Name: " . $row['lastName'];
