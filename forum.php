@@ -205,7 +205,9 @@ if ($type=='post') {
         SET firstName='".$_POST['firstName']."',
         lastName='".$_POST['lastName']."',
         email='".$_POST['email']."',
-        state='".$_POST['state']."'
+        website='".$_POST['website']."',
+        state='".$_POST['state']."',
+        `desc`='".$_POST['desc']."'
         WHERE userID=".$_GET['userid'],$con) or die(mysql_error());
         $pass = $_POST['pass'];
         $pass2 = $_POST['pass2'];
@@ -322,6 +324,7 @@ else if ($type == 'user') {
         <div class="formentry"><span class="label">First Name: </span> <span class="field"><input name="firstName" size="50" maxlength="50" value="<?php echo $row['firstName'] ?>"></input></span></div>
         <div class="formentry"><span class="label">First Name: </span> <span class="field"><input name="lastName" size="50" maxlength="50" value="<?php echo $row['lastName'] ?>"></input></span></div>
         <div class="formentry"><span class="label">E-mail address: </span> <span class="field"><input name="email" size="50" maxlength="50" value="<?php echo $row['email'] ?>"></input></span></div>
+        <div class="formentry"><span class="label">Website: </span> <span class="field"><input name="website" size="50" maxlength="50" value="<?php echo $row['website'] ?>"></input></span></div>
     <div class="formentry"><span class="label">Status:</span><select name="state">
     <option value="non"<?php if ($row['state'] == "non") echo " selected" ?>>Non Member</option>
     <option value="hat"<?php if ($row['state'] == "hat") echo " selected" ?>>HardHat</option>
@@ -330,6 +333,7 @@ else if ($type == 'user') {
     <option value="peng"<?php if ($row['state'] == "peng") echo "selected" ?>>Penguin</option>
     <option value="gnu"<?php if ($row['state'] == "gnu") echo " selected" ?>>GNU</option>
     </select></div>
+        <div class="formentry"><span class="label">Description: </span> <span class="field"><textarea name="desc" rows=10 cols=40><?php echo $row['desc'] ?></textarea></span></div>
         <div class="formentry"><span class="label"></span><span class="field"><button type="submit" class="formbutton">Change</button></span></div>
     </form>
     <?php }
@@ -342,7 +346,29 @@ else if ($type == 'user') {
          echo "<br/>Last Name: " . $row['lastName'];
          echo "<br/>Joined: " . $row['time'];
          if ($row['position']) echo "<br/>Position: " . $row['position'];
-         echo "<br/>Status: " . $row['state'];
+         echo "<br/>Status: ";
+         switch ($row['state']) {
+            case "non":
+                echo "Non Member";
+                break;
+            case "hat":
+                echo "HardHat";
+                break;
+            case "fox":
+                echo "Fox";
+                break;
+            case "gull":
+                echo "Seagull";
+                break;
+            case "peng":
+                echo "Penguin";
+                break;
+            case "gnu":
+                echo "GNU";
+                break;
+         }
+         echo "<br/>Website: <a href=\"".$row['website']."\">".$row['website']."</a>";
+         echo "<br/>Description:<br/>".nl2br($row['desc']);
     }
 ?></div><?php
 }
