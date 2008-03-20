@@ -14,10 +14,13 @@ mysql_select_db("$db_db", $con);
 ?>
 <head>
     <title>ADFA Forum</title>
-    <link rel="stylesheet" type="text/css" href="forum.css" />
     <link rel="stylesheet" type="text/css" href="style<?php echo $css_suffix ?>.css" />
     <!--[if IE ]>
     <link rel="stylesheet" type="text/css" href="ie_style<?php echo $css_suffix ?>.css" />
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="forum.css" />
+    <!--[if IE ]>
+    <link rel="stylesheet" type="text/css" href="ie_forum.css" />
     <![endif]-->
 </head>
 <body>
