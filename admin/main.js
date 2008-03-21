@@ -79,7 +79,7 @@ function postPage(num) {
         "&title="+document.getElementById('title').value, cont, inc);
     if (num=='add') cancel(); else tmpName = '';
 }
-function delProj(num) {
+function delPage(num) {
     cancel();
     ajax("type=pagedel&id="+num, 'page'+num);
 }
