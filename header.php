@@ -4,7 +4,7 @@ function profileLink($username) {
     global $con;
     if ($result = mysql_query("SELECT userID FROM ".$db_prefix_forum."users WHERE name='$username'")) {
         $row = mysql_fetch_array($result);
-        return "<a href=\"forum.php?type=user&amp;userid=" . $row['userID'] . "\">$username</a>";
+        return "<a href=\"?page=forum&amp;type=user&amp;userid=" . $row['userID'] . "\">$username</a>";
     }
     else return $username;
 }
@@ -53,11 +53,11 @@ global $userID;
         <a href=".">Home</a>
     </li>
     <li class="nav2">
-        <a href="forum.php">Forum</a>
+        <a href="?page=forum">Forum</a>
     </li>
 <?php if ($loggedIn) { ?>
     <li class="nav2">
-        <?php echo "<a href=\"forum.php?type=user&amp;userid=$userID\">$user</a>"; ?>
+        <?php echo "<a href=\"?page=forum&amp;type=user&amp;userid=$userID\">$user</a>"; ?>
     </li>
     <?php if (userPos($userID) == 'admin') { ?>
     <li class="nav2">
@@ -65,11 +65,11 @@ global $userID;
     </li>
     <?php } ?>
     <li class="nav2">
-        <a href="forum.php?type=post&amp;mode=logout">Logout</a>
+        <a href="?page=forum&amp;type=post&amp;mode=logout">Logout</a>
     </li>
 <?php } else { ?>
     <li class="nav2">
-        <a href="forum.php?type=login">Log In</a>
+        <a href="?page=forum&amp;type=login">Log In</a>
     </li>
 <?php } ?>
 </ul>

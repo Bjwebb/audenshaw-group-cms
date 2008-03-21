@@ -61,14 +61,8 @@ li.ajaxy {
     display: table-cell;
     padding: 10px;
 }
-#forum #left {
-    width: 80%;
-}
 #right {
     width: 300px;
-}
-#forum #right {
-    width: 200px;
 }
 .box_left, .box_right {
     margin-top: 10px;

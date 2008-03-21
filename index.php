@@ -17,6 +17,12 @@ auth();
         <!--[if IE ]>
         <link rel="stylesheet" type="text/css" href="ie_style<?php echo $css_suffix ?>.css" />
         <![endif]-->
+        <?php if ($_GET['page'] == "forum") { ?>
+        <link rel="stylesheet" type="text/css" href="forum.css" />
+        <!--[if IE ]>
+        <link rel="stylesheet" type="text/css" href="ie_forum.css" />
+        <![endif]-->
+        <?php } ?>
         <script type="text/javascript" src="main.js"></script>
         <script type="text/javascript" src="<?php echo $img_serv; ?>list.js"></script>
         <script type="text/javascript"><!--
@@ -37,6 +43,8 @@ auth();
             </div>
             <div id="content">
                 <div id="left">
+                <?php if ($_GET['page'] == 'forum') include "forum.php";
+                else { ?>
                     <div id="about" class="box_left">
                     <div id="about2" class="box_left_inner">
                         <h2>About Us</h2>
@@ -167,7 +175,8 @@ echo "</ul><script type=\"text/javascript\"><!--\ninit($length); document.write(
                         </div>
                     </div>
                     </div>
-<?php */ ?>
+<?php */
+} ?>
                     <div id="footer" class="box_left">
                     <div id="footer2" class="box_left_inner">
 <div style="float:right"><p><a href="http://www.freedomain.co.nr/">
@@ -264,9 +273,18 @@ while ($row = mysql_fetch_array($result)) {
                         </ul>
                     </div>
                     </div>
+                    <div class="box_right">
+                    <h2>Stats</h2>
+                    <ul class="forum">
+                    <li class="forum">Threads: <?php echo countThreads(); ?></li>
+                    <li class="forum">Posts: <?php echo countPosts(); ?></li>
+                    <li class="forum">Users: <?php echo countUsers(); ?></li>
+                    </ul>
+                    </div>
                 </div>
             </div>
         </div>
+        <?php /* ?>
         <div id="pic_pop" style="
             position: absolute;
             background-color: #6CB6E7;
@@ -284,5 +302,6 @@ while ($row = mysql_fetch_array($result)) {
             <div id="pic_pic" style="">
             </div>
         </div>
+        <?php */ ?>
     </body>
 </html>
