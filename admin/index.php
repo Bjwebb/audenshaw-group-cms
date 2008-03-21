@@ -47,7 +47,7 @@
             <span class="tab"><a href="javascript:tab(2)">News</a></span>
             <span class="tab"><a href="javascript:tab(3)">Projects</a></span>
             <span class="tab"><a href="javascript:tab(4)">Members</a></span>
-            <span class="tab"><a href="javascript:tab(5)">Comments</a></span>
+            <span class="tab"><a href="javascript:tab(5)">Pages</a></span>
             <span class="tab"><a href="javascript:tab(6)">Other</a></span>
         </div>
         <div class="content" id="content">

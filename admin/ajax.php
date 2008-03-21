@@ -32,7 +32,7 @@
                     adminMembers();
                     break;
                 case 5:
-                    adminComments();
+                    adminPages();
                     break;
                 case 6:
                     adminOther();
@@ -123,6 +123,49 @@
                     mysql_query("DELETE FROM ".$db_prefix."projects WHERE id=$id");
                     echo "<i>Project Removed</i>";
                     break;
+
+                case 'pageform':
+                    if ($id == 'add') $row = Array();
+                    else {
+                        $result = mysql_query("SELECT * FROM ".$db_prefix."pages WHERE id=$id",$con);
+                        $row = mysql_fetch_array($result);
+                    }
+                    echo "<form id=\"ajaxform\">";
+                    echo "<input type=\"text\" id=\"name\" value=\"".$row['name']."\"><br/>";
+                    echo "<input type=\"text\" id=\"title\" value=\"".$row['title']."\"><br/>";
+                    echo "<textarea type=\"text\" id=\"text\" cols=\"60\" rows=\"10\" >".$row['text']."</textarea><br/>";
+                    echo "<button type=\"button\" onClick=\"cancel()\">Cancel</button>";
+                    echo "<button type=\"button\" onClick=\"postPage('$id')\">Submit</button>";
+                    echo "</form>";
+                    break;
+                    break;
+                case 'pagepost':
+                    $text = $_POST['text'];
+                    $title = $_POST['title'];
+                    $name = $_POST['name'];
+                    if ($id == 'add') {
+                        mysql_query("INSERT INTO ".$db_prefix."pages
+                            (name, title, text)
+                            VALUES ('$name', '$title', '$text')",$con);
+                        $id = mysql_insert_id($con);
+                        $add = true;
+                    } else {
+                        mysql_query("UPDATE ".$db_prefix."pages
+                            SET name='$name', title='$title', text='$text'
+                            WHERE id=$id",$con);
+                    }
+                    $result = mysql_query("SELECT * FROM ".$db_prefix."pages WHERE id=$id",$con);
+                    while ($row = mysql_fetch_array($result)) {
+                        if ($add) echo "<li id=\"pages$id\">";
+                        formatPage($row);
+                        if ($add) echo "</li>";
+                    }
+                    break;
+                case 'pagedel':
+                    mysql_query("DELETE FROM ".$db_prefix."pages WHERE id=$id");
+                    echo "<i>Page Removed</i>";
+                    break;
+
                 case 'memform':
                     if ($id == 'add') $row = Array();
                     else {

@@ -43,7 +43,26 @@ auth();
             </div>
             <div id="content">
                 <div id="left">
-                <?php if ($_GET['page'] == 'forum') include "forum.php";
+                <?php
+                $page = $_GET['page'];
+                if ($page == 'forum') include "forum.php";
+                else if ($page != '') {
+                    if ($result = mysql_query("SELECT title,text FROM `".$db_prefix."pages` WHERE name='$page'",$con)); else die(mysql_error());
+                    ?>
+                    <div id="about" class="box_left">
+                    <div id="about2" class="box_left_inner">
+                    <?php
+                    if ($row = mysql_fetch_array($result)) {
+                        echo "<h2>".$row['title']."</h2><p>".nl2br($row['text'])."</p>";
+                    }
+                    else {
+                        echo "<h2>Error</h2>Sorry the page $page does not exist.";
+                    }
+                    ?>
+                    </div>
+                    </div>
+                    <?php
+                }
                 else { ?>
                     <div id="about" class="box_left">
                     <div id="about2" class="box_left_inner">

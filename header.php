@@ -1,4 +1,29 @@
 <?php
+function countThreads() {
+    global $db_prefix_forum;
+    $result = mysql_query("SELECT COUNT(*) FROM ".$db_prefix_forum."threads");
+    $row = mysql_fetch_array($result);
+    return $row['COUNT(*)'];
+}
+function countPosts() {
+    global $db_prefix_forum;
+    $result = mysql_query("SELECT COUNT(*) FROM ".$db_prefix_forum."posts");
+    $row = mysql_fetch_array($result);
+    return $row['COUNT(*)'];
+}
+function countReplies($thread) {
+    global $db_prefix_forum;
+    $result = mysql_query("SELECT COUNT(*) FROM ".$db_prefix_forum."posts WHERE threadID=$thread");
+    $row = mysql_fetch_array($result);
+    return $row['COUNT(*)'] - 1;
+}
+function countUsers() {
+    global $db_prefix_forum;
+    $result = mysql_query("SELECT COUNT(*) FROM ".$db_prefix_forum."users");
+    $row = mysql_fetch_array($result);
+    return $row['COUNT(*)'];
+}
+
 function profileLink($username) {
     global $db_prefix_forum;
     global $con;
@@ -103,6 +128,13 @@ function formatProject($row) {
     echo " <button type=\"button\" onClick=\"editProj($i)\">Edit</button>";
     echo "<button type=\"button\" onClick=\"delProj($i)\">Delete</button>";
 }
+function formatPage($row) {
+    $i = $row['id'];
+    echo "<b>".$row['title']."</b><br/>";
+    echo "".nl2br($row['text'])."<br/>";
+    echo " <button type=\"button\" onClick=\"editPage($i)\">Edit</button>";
+    echo "<button type=\"button\" onClick=\"delPage($i)\">Delete</button>";
+}
 function formatMember($row) {
     $i = $row['id'];
     echo $row['firstName']." ".$row['lastName'];
@@ -174,6 +206,21 @@ function adminProjects() {
             }
         ?></ul>
         <div id="projadd"><button type="button" onClick="editProj('add')">Add New Project</button></div>
+<?php }
+function adminPages() {
+    global $con;
+    global $db_prefix;
+    sqlcon(); ?>
+        <h2>Pages</h2>
+        <ul id="pagelist"><?php
+            $result = mysql_query("SELECT * FROM ".$db_prefix."pages",$con);
+            while ($row = mysql_fetch_array($result)) {
+                echo "<li id=\"page".$row['id']."\">";
+                formatPage($row);
+                echo "</li>\n";
+            }
+        ?></ul>
+        <div id="pageadd"><button type="button" onClick="editPage('add')">Add New Page</button></div>
 <?php }
 function memList() {
     global $con;

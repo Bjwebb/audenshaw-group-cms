@@ -6,35 +6,11 @@ $perPage = 10;
 $loggedIn = false;
 
 // **************************************** Functions ****************************************
-function countThreads() {
-    global $db_prefix_forum;
-    $result = mysql_query("SELECT COUNT(*) FROM ".$db_prefix_forum."threads");
-    $row = mysql_fetch_array($result);
-    return $row['COUNT(*)'];
-}
 function maxThread() {
     global $db_prefix_forum;
     $result = mysql_query("SELECT MAX(threadID) FROM ".$db_prefix_forum."threads");
     $row = mysql_fetch_array($result);
     return $row['MAX(threadID)'];
-}
-function countPosts() {
-    global $db_prefix_forum;
-    $result = mysql_query("SELECT COUNT(*) FROM ".$db_prefix_forum."posts");
-    $row = mysql_fetch_array($result);
-    return $row['COUNT(*)'];
-}
-function countReplies($thread) {
-    global $db_prefix_forum;
-    $result = mysql_query("SELECT COUNT(*) FROM ".$db_prefix_forum."posts WHERE threadID=$thread");
-    $row = mysql_fetch_array($result);
-    return $row['COUNT(*)'] - 1;
-}
-function countUsers() {
-    global $db_prefix_forum;
-    $result = mysql_query("SELECT COUNT(*) FROM ".$db_prefix_forum."users");
-    $row = mysql_fetch_array($result);
-    return $row['COUNT(*)'];
 }
 function newThread($name, $user, $content) {
     global $db_prefix_forum;

@@ -64,6 +64,26 @@ function delProj(num) {
     ajax("type=projdel&id="+num, 'proj'+num);
 }
 
+function editPage(num) {
+    cancel();
+    tmpName = 'page'+num;
+    tmpText = document.getElementById(tmpName).innerHTML;
+    ajax("type=pageform&id="+num,tmpName);
+}
+function postPage(num) {
+    if (num == 'add') { cont = 'pagelist'; inc=true; }
+    else { cont = 'page'+num; inc=false; }
+    ajax("type=pagepost&id="+num+
+        "&name="+document.getElementById('name').value+
+        "&text="+document.getElementById('text').value+
+        "&title="+document.getElementById('title').value, cont, inc);
+    if (num=='add') cancel(); else tmpName = '';
+}
+function delProj(num) {
+    cancel();
+    ajax("type=pagedel&id="+num, 'page'+num);
+}
+
 function editMem(num) {
     cancel();
     tmpName = 'mem'+num;
