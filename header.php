@@ -192,18 +192,38 @@ function adminNews() {
         ?></ul>
         <div id="newsadd"><button type="button" onClick="editNews('add')">Add New Story</button></div>
 <?php }
+function projList() {
+    global $con;
+    global $db_prefix;
+    $result = mysql_query("SELECT * FROM ".$db_prefix."projects ORDER BY id",$con);
+    $i = 0;
+    while ($row = mysql_fetch_array($result)) {
+        $rowArray[$i] = $row;
+        $i++;
+    }
+    for ($j=0; $j<$i; $j++) {
+        $ID = $rowArray[$j]['id'];
+        $nextID = $rowArray[$j+1]['id'];
+        echo "<li id=\"proj$ID\">";
+        if ($prevID)
+            echo "<a href=\"javascript:void()\" onClick=\"ajax('type=projmove&amp;id1=$prevID&amp;id2=$ID', 'projlist', false)\" style=\"text-decoration: none;\">↑</a>";
+        else echo "↑";
+        if ($nextID)
+            echo "<a href=\"javascript:void()\" onClick=\"ajax('type=projmove&amp;id1=$ID&amp;id2=$nextID', 'projlist', false)\" style=\"text-decoration: none;\">↓</a>";
+        else echo "↓";
+        echo " ";
+        formatProject($rowArray[$j]);
+        echo "</li>\n";
+        $prevID = $ID;
+    }
+}
 function adminProjects() {
     global $con;
     global $db_prefix;
     sqlcon(); ?>
         <h2>Projects</h2>
         <ul id="projlist"><?php
-            $result = mysql_query("SELECT * FROM ".$db_prefix."projects",$con);
-            while ($row = mysql_fetch_array($result)) {
-                echo "<li id=\"proj".$row['id']."\">";
-                formatProject($row);
-                echo "</li>\n";
-            }
+            projList();
         ?></ul>
         <div id="projadd"><button type="button" onClick="editProj('add')">Add New Project</button></div>
 <?php }

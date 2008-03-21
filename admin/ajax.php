@@ -123,6 +123,20 @@
                     mysql_query("DELETE FROM ".$db_prefix."projects WHERE id=$id");
                     echo "<i>Project Removed</i>";
                     break;
+                case 'projmove':
+                    $id1 = $_POST['id1'];
+                    $id2 = $_POST['id2'];
+                    mysql_query("UPDATE ".$db_prefix."projects
+                            SET id=1000
+                            WHERE id=$id1",$con); // If this breaks, then we are amazing
+                    mysql_query("UPDATE ".$db_prefix."projects
+                            SET id=$id1
+                            WHERE id=$id2",$con);
+                    mysql_query("UPDATE ".$db_prefix."projects
+                            SET id=$id2
+                            WHERE id=1000",$con);
+                    projList();
+                    break;
 
                 case 'pageform':
                     if ($id == 'add') $row = Array();

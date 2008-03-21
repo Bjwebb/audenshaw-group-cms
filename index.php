@@ -141,7 +141,7 @@ echo "</ul><script type=\"text/javascript\"><!--\nnews_init($length); document.w
                         <div class="text">
                             <ul class="ajaxy">
 <?php 
-if ($result = mysql_query("SELECT title,text FROM `".$db_prefix."projects`",$con)); else die(mysql_error());
+if ($result = mysql_query("SELECT title,text FROM `".$db_prefix."projects` ORDER BY id",$con)); else die(mysql_error());
 $link = Array("test");
 $link[0] = "Oh noes";
 $text = Array();
