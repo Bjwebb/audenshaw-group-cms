@@ -4,7 +4,7 @@ function profileLink($username) {
     global $con;
     if ($result = mysql_query("SELECT userID FROM ".$db_prefix_forum."users WHERE name='$username'")) {
         $row = mysql_fetch_array($result);
-        return "<a href=\"forum.php?type=user&userid=" . $row['userID'] . "\">$username</a>";
+        return "<a href=\"forum.php?type=user&amp;userid=" . $row['userID'] . "\">$username</a>";
     }
     else return $username;
 }
@@ -57,7 +57,7 @@ global $userID;
     </li>
 <?php if ($loggedIn) { ?>
     <li class="nav2">
-        <?php echo "<a href=\"forum.php?type=user&userid=$userID\">$user</a>"; ?>
+        <?php echo "<a href=\"forum.php?type=user&amp;userid=$userID\">$user</a>"; ?>
     </li>
     <?php if (userPos($userID) == 'admin') { ?>
     <li class="nav2">
@@ -65,7 +65,7 @@ global $userID;
     </li>
     <?php } ?>
     <li class="nav2">
-        <a href="forum.php?type=post&mode=logout">Logout</a>
+        <a href="forum.php?type=post&amp;mode=logout">Logout</a>
     </li>
 <?php } else { ?>
     <li class="nav2">
@@ -192,10 +192,10 @@ function memList() {
         $nextID = $rowArray[$j+1]['id'];
         echo "<li id=\"mem$ID\">";
         if ($prevID)
-            echo "<a href=\"javascript:void()\" onClick=\"ajax('type=memmove&id1=$prevID&id2=$ID', 'memlist', false)\" style=\"text-decoration: none;\">↑</a>";
+            echo "<a href=\"javascript:void()\" onClick=\"ajax('type=memmove&amp;id1=$prevID&amp;id2=$ID', 'memlist', false)\" style=\"text-decoration: none;\">↑</a>";
         else echo "↑";
         if ($nextID)
-            echo "<a href=\"javascript:void()\" onClick=\"ajax('type=memmove&id1=$ID&id2=$nextID', 'memlist', false)\" style=\"text-decoration: none;\">↓</a>";
+            echo "<a href=\"javascript:void()\" onClick=\"ajax('type=memmove&amp;id1=$ID&amp;id2=$nextID', 'memlist', false)\" style=\"text-decoration: none;\">↓</a>";
         else echo "↓";
         echo " ";
         formatMember($rowArray[$j]);
