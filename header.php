@@ -29,7 +29,9 @@ function profileLink($username) {
     global $con;
     if ($result = mysql_query("SELECT userID FROM ".$db_prefix_forum."users WHERE name='$username'")) {
         $row = mysql_fetch_array($result);
-        return "<a href=\"?page=forum&amp;type=user&amp;userid=" . $row['userID'] . "\">$username</a>";
+        if ($row['userID'] == '') return $username;
+        else
+            return "<a href=\"?page=forum&amp;type=user&amp;userid=" . $row['userID'] . "\">$username</a>";
     }
     else return $username;
 }

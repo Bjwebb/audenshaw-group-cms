@@ -362,33 +362,33 @@ while ($row = mysql_fetch_array($result)) {
             $perPage++; // This is probably a bug, and should be fixed.
             $result = mysql_query("SELECT COUNT(*) FROM ".$db_prefix_forum."posts WHERE threadID=$thread ORDER BY postID", $con);
             $row = mysql_fetch_array($result);
-            $page = $_GET['page'];
-            if ($page == '') $page = 1;
+            $fpage = $_GET['fpage'];
+            if ($fpage == '') $fpage = 1;
             $numPages = ceil($row['COUNT(*)']/$perPage);
-            if ($page > $numPages) { echo "Sorry, there are not that many pages, showing page one.<br/><br/>"; $page = 1; }
-            $buttons = "<ul class=\"post-nav\"><li class=\"nav2\"><a href=\"?page=forum&amp;thread=$thread&amp;page=1\">&larr;&mdash;&mdash;</a></li><li class=\"post-nav\">";
+            if ($fpage > $numPages) { echo "Sorry, there are not that many pages, showing page one.<br/><br/>"; $fpage = 1; }
+            $buttons = "<ul class=\"post-nav\"><li class=\"nav2\"><a href=\"?page=forum&amp;thread=$thread&amp;fpage=1\">&larr;&mdash;&mdash;</a></li><li class=\"post-nav\">";
             
-            if ($page-1 > 0) $buttons .= "<a href=\"?page=forum&amp;thread=$thread&amp;page=" . ($page-1) . "\">Previous</a>";
+            if ($fpage-1 > 0) $buttons .= "<a href=\"?page=forum&amp;thread=$thread&amp;fpage=" . ($fpage-1) . "\">Previous</a>";
             else $buttons .= "Previous";
             
             $buttons .= "</li><li class=\"post-nav\">";
             
-            if ($page < $row['COUNT(*)']/$perPage) $buttons .= "<a href=\"?page=forum&amp;thread=$thread&amp;page=" . ($page+1) . "\">Next</a>";
+            if ($fpage < $row['COUNT(*)']/$perPage) $buttons .= "<a href=\"?page=forum&amp;thread=$thread&amp;fpage=" . ($fpage+1) . "\">Next</a>";
             else $buttons .= "Next";
             
-            $buttons .= "</li><li class=\"post-nav\"><a href=\"?page=forum&amp;thread=$thread&amp;page=$numPages\">&mdash;&mdash;&rarr;</a></li></ul>";
+            $buttons .= "</li><li class=\"post-nav\"><a href=\"?page=forum&amp;thread=$thread&amp;fpage=$numPages\">&mdash;&mdash;&rarr;</a></li></ul>";
             echo $buttons;
         }
         echo "<div class=\"text\" style=\"margin: 20 30;\">";
         $result = mysql_query("SELECT * FROM ".$db_prefix_forum."posts WHERE threadID=$thread ORDER BY postID", $con);
         if ($page) {
-            $skip = ($page-1)*$perPage;
+            $skip = ($fpage-1)*$perPage;
             for ($i=1; $i<$skip; $i++) { $row = mysql_fetch_array($result); }
         }
         $i = 1;
         while ($row = mysql_fetch_array($result)) { 
             $i++;
-            echo "<b>" . $row['author'] . " &mdash; " . date("d/m/y H:i", strtotime($row['time'])) . " &mdash; " . $row['postID'] . "</b><br/>" . nl2br($row['content']) . "<br/><br/>";
+            echo "<b>" . profileLink($row['author']) . " &mdash; " . date("d/m/y H:i", strtotime($row['time'])) . " &mdash; " . $row['postID'] . "</b><br/>" . nl2br($row['content']) . "<br/><br/>";
             if ($loggedIn) { markRead($user, $row['postID']); }
             if  ($i == $perPage) break;
         }
