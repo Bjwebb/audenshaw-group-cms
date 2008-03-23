@@ -133,7 +133,7 @@ function formatProject($row) {
 function formatPage($row) {
     $i = $row['id'];
     echo "<b>".$row['title']."</b><br/>";
-    echo "".nl2br($row['text'])."<br/>";
+    echo "".$row['text']."<br/>";
     echo " <button type=\"button\" onClick=\"editPage($i)\">Edit</button>";
     echo "<button type=\"button\" onClick=\"delPage($i)\">Delete</button>";
 }

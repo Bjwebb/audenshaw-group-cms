@@ -53,7 +53,7 @@ auth();
                     <div id="about2" class="box_left_inner">
                     <?php
                     if ($row = mysql_fetch_array($result)) {
-                        echo "<h2>".$row['title']."</h2><p>".nl2br($row['text'])."</p>";
+                        echo "<h2>".$row['title']."</h2>".$row['text'];
                     }
                     else {
                         echo "<h2>Error</h2>Sorry the page $page does not exist.";
