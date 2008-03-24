@@ -273,7 +273,7 @@ for ($i=0; $i<count($members); $i++) {
 $userid = $_GET['userid'];
 $result = mysql_query("SELECT * FROM ".$db_prefix_forum."users WHERE state!='non'");
 while ($row = mysql_fetch_array($result)) {
-    if ($row['firstName'] != '') echo "<li><a href=\"?page=forum&amp;type=user&amp;userid=" . $row['userID'] . "\">" . $row['firstName']." ".$row['lastName'] . "</a></li>";
+    if ($row['firstName'] != '') echo "<li><img src=\"http://two.xthost.info/bjwebb/adfa/".$row['state']."_32.png\" alt=\"".$row['state']."\"/><a href=\"?page=forum&amp;type=user&amp;userid=" . $row['userID'] . "\">" . $row['firstName']." ".$row['lastName'] . "</a></li>";
     if ($members[$i][1])
         echo "<span class=\"job\"> - ".$row['position']."</span>";
 }
