@@ -38,7 +38,7 @@ auth();
             }
             --></script>
             <div id="header">
-                <h1><a href="?" style="color: black;"><?php echo showOther("title"); ?></a></h2>
+                <h1><a href="?" style="color: black;"><?php echo showOther("title"); ?></a></h1>
                 <?php $sub = showOther("subtitle"); echo "<h2 id=\"sub\">".$sub."</h2>"; ?>
             </div>
             <div id="content">
