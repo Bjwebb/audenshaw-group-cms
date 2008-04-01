@@ -84,6 +84,10 @@ global $con;
     <li class="nav2">
         <a href="?page=forum">Forum</a>
     </li>
+<?php $result = mysql_query("SELECT title,text FROM `".$db_prefix."pages` WHERE name='nav'",$con) or die(mysql_error());
+      if ($row = mysql_fetch_array($result)) echo $row['text']; ?>
+</ul>
+<ul>
 <?php if ($loggedIn) { ?>
     <li class="nav2">
         <?php echo "<a href=\"?page=forum&amp;type=user&amp;userid=$userID\">$user</a>"; ?>
@@ -99,9 +103,7 @@ global $con;
 <?php } else { ?>
     <li class="nav2">
         <a href="?page=forum&amp;type=login">Log In</a>
-    </li> <?php }
-    $result = mysql_query("SELECT title,text FROM `".$db_prefix."pages` WHERE name='nav'",$con) or die(mysql_error());
-                    if ($row = mysql_fetch_array($result)) echo $row['text']; ?>
+    </li> <?php } ?>
 </ul>
 </div>
 <?php }
