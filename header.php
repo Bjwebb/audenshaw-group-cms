@@ -73,6 +73,8 @@ function navbox() {
 global $loggedIn;
 global $user;
 global $userID;
+global $db_prefix;
+global $con;
 ?><div class="box_right">
 <h2>Navigation</h2>
 <ul class="nav2">
@@ -97,8 +99,9 @@ global $userID;
 <?php } else { ?>
     <li class="nav2">
         <a href="?page=forum&amp;type=login">Log In</a>
-    </li>
-<?php } ?>
+    </li> <?php }
+    $result = mysql_query("SELECT title,text FROM `".$db_prefix."pages` WHERE name='nav'",$con) or die(mysql_error());
+                    if ($row = mysql_fetch_array($result)) echo $row['text']; ?>
 </ul>
 </div>
 <?php }
