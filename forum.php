@@ -269,7 +269,7 @@ else if ($type == 'user') {
         <div class="formentry"><span class="label">First Name: </span> <span class="field"><input name="lastName" size="50" maxlength="50" value="<?php echo $row['lastName'] ?>"></input></span></div>
         <div class="formentry"><span class="label">E-mail address: </span> <span class="field"><input name="email" size="50" maxlength="50" value="<?php echo $row['email'] ?>"></input></span></div>
         <div class="formentry"><span class="label">Website: </span> <span class="field"><input name="website" size="50" maxlength="50" value="<?php echo $row['website'] ?>"></input></span></div>
-    <div class="formentry"><span class="label">Status:</span><select name="state">
+    <div class="formentry"><span class="label">Level:</span><select name="state">
     <option value="non"<?php if ($row['state'] == "non") echo " selected" ?>>Non Member</option>
     <option value="hat"<?php if ($row['state'] == "hat") echo " selected" ?>>HardHat</option>
     <option value="fox"<?php if ($row['state'] == "fox") echo " selected" ?>>Fox</option>
@@ -290,7 +290,7 @@ else if ($type == 'user') {
          echo "<br/>Last Name: " . $row['lastName'];
          echo "<br/>Joined: " . $row['time'];
          if ($row['position']) echo "<br/>Position: " . $row['position'];
-         echo "<br/>Status: ";
+         echo "<br/>Level: ";
          switch ($row['state']) {
             case "non":
                 echo "Non Member";

@@ -147,7 +147,7 @@
                     echo "<form id=\"ajaxform\">";
                     echo "<input type=\"text\" id=\"name\" value=\"".$row['name']."\"><br/>";
                     echo "<input type=\"text\" id=\"title\" value=\"".$row['title']."\"><br/>";
-                    echo "<textarea type=\"text\" id=\"text\" cols=\"60\" rows=\"10\" >".$row['text']."</textarea><br/>";
+                    echo "<textarea type=\"text\" cols=\"100\" rows=\"20\" id=\"text\" cols=\"60\" rows=\"10\" >".$row['text']."</textarea><br/>";
                     echo "<button type=\"button\" onClick=\"cancel()\">Cancel</button>";
                     echo "<button type=\"button\" onClick=\"postPage('$id')\">Submit</button>";
                     echo "</form>";
