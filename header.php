@@ -118,7 +118,7 @@ function upOther($type, $value) {
     global $con;
     global $db_prefix;
     mysql_query("DELETE FROM `".$db_prefix."other` WHERE type='$type'", $con) or die(mysql_error());
-    mysql_query("INSERT INTO `".$db_prefix."other` (type,text) VALUES ('$type','$value')", $con) or die(mysql_error());
+    mysql_query("INSERT INTO `".$db_prefix."other` (type,text) VALUES ('".mysql_real_escape_string($type)."','".mysql_real_escape_string($value)."')", $con) or die(mysql_error());
 }
 
 function formatNews($row) {

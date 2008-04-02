@@ -16,16 +16,16 @@ function newThread($name, $user, $content) {
     global $db_prefix_forum;
     if ($name == NULL) { $name = "Untitled"; }
     global $con;
-    if (!mysql_query("INSERT INTO ".$db_prefix_forum."threads(title, author, time) VALUES('$name', '$user', NOW())",$con)) echo mysql_error();
+    if (!mysql_query("INSERT INTO ".$db_prefix_forum."threads(title, author, time) VALUES('".mysql_real_escape_string($name)."', '".mysql_real_escape_string($user)."', NOW())",$con)) echo mysql_error();
 
     $maxThread = maxThread();
 
-    if (!mysql_query("INSERT INTO ".$db_prefix_forum."posts(threadID, content, author, time) VALUES('$maxThread', '$content', '$user', NOW())",$con)) echo mysql_error();
+    if (!mysql_query("INSERT INTO ".$db_prefix_forum."posts(threadID, content, author, time) VALUES('".mysql_real_escape_string($maxThread)."', '".mysql_real_escape_string($content)."', '".mysql_real_escape_string($user)."', NOW())",$con)) echo mysql_error();
 }
 function newPost($thread, $user, $content) {
     global $db_prefix_forum;
     global $con;
-    if (!mysql_query("INSERT INTO ".$db_prefix_forum."posts(threadID, content, author, time) VALUES('$thread', '$content', '$user', NOW())",$con)) echo mysql_error();
+    if (!mysql_query("INSERT INTO ".$db_prefix_forum."posts(threadID, content, author, time) VALUES('".mysql_real_escape_string($thread)."', '".mysql_real_escape_string($content)."', '".mysql_real_escape_string($user)."', NOW())",$con)) echo mysql_error();
 }
 function editPost($thread, $post, $content) {
 
@@ -34,13 +34,13 @@ function newUser($user, $password) {
     global $db_prefix_forum;
     global $con;
     $password = sha1($password);
-    if (!mysql_query("INSERT INTO ".$db_prefix_forum."users(name, password, time) VALUES('$user', '$password', NOW())",$con)) echo mysql_error();
+    if (!mysql_query("INSERT INTO ".$db_prefix_forum."users(name, password, time) VALUES('".mysql_real_escape_string($user)."', '".mysql_real_escape_string($password)."', NOW())",$con)) echo mysql_error();
 }
 function markRead($user, $post) {
     global $db_prefix_forum;
     // Applies to posts
     global $con;
-    if (!mysql_query("INSERT INTO ".$db_prefix_forum."hasRead(user, postID) VALUES('$user', '$post')",$con)) echo mysql_error();
+    if (!mysql_query("INSERT INTO ".$db_prefix_forum."hasRead(user, postID) VALUES('".mysql_real_escape_string($user)."', '".mysql_real_escape_string($post)."')",$con)) echo mysql_error();
 }
 function hasRead($user, $thread) {
     global $db_prefix_forum;

@@ -1,20 +1,20 @@
-/*function hideAll(num) {
-    for (i=1; i<(num+1); i++) {
-        document.getElementById('con'+i).style.visibility = 'hidden';
-    }
+function urlencode(str) {
+    str = escape(str);
+    str = str.replace('+', '%2B');
+    str = str.replace('%20', '+');
+    str = str.replace('*', '%2A');
+    str = str.replace('/', '%2F');
+    str = str.replace('@', '%40');
+    return str;
 }
-function tab(num) {
-    cancel();
-    hideAll(5);
-    document.getElementById('con'+num).style.visibility = 'visible';
-}*/
+
 function tab(num) {
     ajax("page="+num, 'content', false);
 }
 
 function postAbout() {
     ajax("type=about"+
-        "&text="+document.getElementById('about').value, 'aboutResult', false);
+        "&text="+urlencode(document.getElementById('about').value), 'aboutResult', false);
 }
 
 tmpName = '';
@@ -36,8 +36,8 @@ function postNews(num) {
     if (num == 'add') { cont = 'newslist'; inc=true; }
     else { cont = 'news'+num; inc=false; }
     ajax("type=newspost&id="+num+
-        "&text="+document.getElementById('text').value+
-        "&title="+document.getElementById('title').value, cont, inc);
+        "&text="+urlencode(document.getElementById('text').value)+
+        "&title="+urlencode(document.getElementById('title').value), cont, inc);
     if (num=='add') cancel(); else tmpName = '';
 }
 function delNews(num) {
@@ -55,8 +55,8 @@ function postProj(num) {
     if (num == 'add') { cont = 'projlist'; inc=true; }
     else { cont = 'proj'+num; inc=false; }
     ajax("type=projpost&id="+num+
-        "&text="+document.getElementById('text').value+
-        "&title="+document.getElementById('title').value, cont, inc);
+        "&text="+urlencode(document.getElementById('text').value)+
+        "&title="+urlencode(document.getElementById('title').value), cont, inc);
     if (num=='add') cancel(); else tmpName = '';
 }
 function delProj(num) {
@@ -74,9 +74,9 @@ function postPage(num) {
     if (num == 'add') { cont = 'pagelist'; inc=true; }
     else { cont = 'page'+num; inc=false; }
     ajax("type=pagepost&id="+num+
-        "&name="+document.getElementById('name').value+
-        "&text="+document.getElementById('text').value+
-        "&title="+document.getElementById('title').value, cont, inc);
+        "&name="+urlencode(document.getElementById('name').value)+
+        "&text="+urlencode(document.getElementById('text').value)+
+        "&title="+urlencode(document.getElementById('title').value), cont, inc);
     if (num=='add') cancel(); else tmpName = '';
 }
 function delPage(num) {
@@ -94,9 +94,9 @@ function postMem(num) {
     if (num == 'add') { cont = 'memlist'; inc=true; }
     else { cont = 'mem'+num; inc=false; }
     ajax("type=mempost&id="+num+
-        "&fn="+document.getElementById('fn').value+
-        "&ln="+document.getElementById('ln').value+
-        "&pos="+document.getElementById('pos').value, cont, inc);
+        "&fn="+urlencode(document.getElementById('fn').value)+
+        "&ln="+urlencode(document.getElementById('ln').value)+
+        "&pos="+urlencode(document.getElementById('pos').value), cont, inc);
     if (num=='add') cancel(); else tmpName = '';
 }
 function delMem(num) {
@@ -116,8 +116,8 @@ function postOth(num) {
     else if (num == 'links') { cont = 'othlinkslist'; inc=true; }
     else { cont = 'oth'+num; inc=false; }
     ajax("type=othpost&id="+num+
-        "&text="+document.getElementById('text').value+
-        "&link="+document.getElementById('link').value, cont, inc);
+        "&text="+urlencode(document.getElementById('text').value)+
+        "&link="+urlencode(document.getElementById('link').value), cont, inc);
     if (num=='social'||num=='contact'||num=='links') cancel(); else tmpName = '';
 }
 function delOth(num) {
