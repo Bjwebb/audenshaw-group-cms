@@ -165,7 +165,7 @@
                         $add = true;
                     } else {
                         mysql_query("UPDATE ".$db_prefix."pages
-                            SET name='".mysql_real_escape_string($name)."', title='".mysql_real_escape_string($title)."', text='".mysql_real_escape_string($text)."'
+                            SET name='".$name."', title='".$title."', text='".$text."'
                             WHERE id=$id",$con);
                     }
                     $result = mysql_query("SELECT * FROM ".$db_prefix."pages WHERE id=$id",$con);
