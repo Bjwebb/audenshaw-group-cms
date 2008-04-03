@@ -64,7 +64,7 @@
                     if ($id == 'add') {
                         mysql_query("INSERT INTO ".$db_prefix."news
                             (title, text, date)
-                            VALUES ('".mysql_real_escape_string($title)."', '".mysql_real_escape_string($text)."', NOW())",$con);
+                            VALUES ('$title', '$text', NOW())",$con);
                         $id = mysql_insert_id($con);
                         $add = true;
                     } else {
@@ -104,7 +104,7 @@
                     if ($id == 'add') {
                         mysql_query("INSERT INTO ".$db_prefix."projects
                             (title, text)
-                            VALUES ('".mysql_real_escape_string($title)."', '".mysql_real_escape_string($text)."')",$con);
+                            VALUES ('$title', '$text')",$con);
                         $id = mysql_insert_id($con);
                         $add = true;
                     } else {
@@ -160,12 +160,12 @@
                     if ($id == 'add') {
                         mysql_query("INSERT INTO ".$db_prefix."pages
                             (name, title, text)
-                            VALUES ('".mysql_real_escape_string($name)."', '".mysql_real_escape_string($title)."', '".mysql_real_escape_string($text)."')",$con);
+                            VALUES ('$name', '$title', '$text')",$con);
                         $id = mysql_insert_id($con);
                         $add = true;
                     } else {
                         mysql_query("UPDATE ".$db_prefix."pages
-                            SET name='".$name."', title='".$title."', text='".$text."'
+                            SET name='$name', title='$title', text='$text'
                             WHERE id=$id",$con);
                     }
                     $result = mysql_query("SELECT * FROM ".$db_prefix."pages WHERE id=$id",$con);
@@ -201,7 +201,7 @@
                     if ($id == 'add') {
                         mysql_query("INSERT INTO ".$db_prefix."members
                             (firstName, lastName, position)
-                            VALUES ('".mysql_real_escape_string($fn)."', '".mysql_real_escape_string($ln)."', '".mysql_real_escape_string($pos)."')",$con);
+                            VALUES ('$fn', '$ln', '$pos')",$con);
                         $id = mysql_insert_id($con);
                         $add = true;
                     } else {
@@ -254,7 +254,7 @@
                     if ($id == 'social' || $id == 'contact' || $id == 'links') {
                         mysql_query("INSERT INTO ".$db_prefix."other
                             (link, text, type)
-                            VALUES ('".mysql_real_escape_string($link)."', '".mysql_real_escape_string($text)."', '".mysql_real_escape_string($id)."')",$con);
+                            VALUES ('$link', '$text', '$id')",$con);
                         $id = mysql_insert_id($con);
                         $add = true;
                     } else {
