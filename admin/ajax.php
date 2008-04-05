@@ -152,7 +152,6 @@
                     echo "<button type=\"button\" onClick=\"postPage('$id')\">Submit</button>";
                     echo "</form>";
                     break;
-                    break;
                 case 'pagepost':
                     $text = $_POST['text'];
                     $title = $_POST['title'];

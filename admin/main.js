@@ -68,7 +68,7 @@ function editPage(num) {
     cancel();
     tmpName = 'page'+num;
     tmpText = document.getElementById(tmpName).innerHTML;
-    ajax("type=pageform&id="+num,tmpName);
+    ajax("type=pageform&id="+num,tmpName,false);
 }
 function postPage(num) {
     if (num == 'add') { cont = 'pagelist'; inc=true; }

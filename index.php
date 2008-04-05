@@ -24,6 +24,8 @@ auth();
         <![endif]-->
         <?php } ?>
         <script type="text/javascript" src="main.js"></script>
+        <?php if (userPos($userID) == 'admin') { ?><script type="text/javascript" src="admin/ajax.js"></script>
+        <script type="text/javascript" src="admin/main.js"></script><?php } ?>
         <script type="text/javascript" src="<?php echo $img_serv; ?>list.js"></script>
         <script type="text/javascript"><!--
         imgServ = '<?php echo $img_serv; ?>';
@@ -47,13 +49,15 @@ auth();
                 $page = $_GET['page'];
                 if ($page == 'forum') include "forum.php";
                 else if ($page != '') {
-                    if ($result = mysql_query("SELECT title,text FROM `".$db_prefix."pages` WHERE name='$page'",$con)); else die(mysql_error());
+                    if ($result = mysql_query("SELECT * FROM `".$db_prefix."pages` WHERE name='$page'",$con)); else die(mysql_error());
                     ?>
                     <div id="about" class="box_left">
                     <div id="about2" class="box_left_inner">
                     <?php
                     if ($row = mysql_fetch_array($result)) {
-                        echo "<h2>".$row['title']."</h2>".$row['text'];
+                        echo "<h2>".$row['title'];
+                        if (userPos($userID) == 'admin') echo " <button type=\"button\" onClick=\"editPage(".$row['id'].")\">Edit</button>";
+                        echo "</h2><div id=\"page".$row['id']."\">".$row['text']."</div>";
                     }
                     else {
                         echo "<h2>Error</h2>Sorry the page $page does not exist.";
@@ -198,8 +202,8 @@ echo "</ul><script type=\"text/javascript\"><!--\ninit($length); document.write(
 } ?>
                     <div id="footer" class="box_left">
                     <div id="footer2" class="box_left_inner">
-<div style="float:right"><p><a href="http://www.freedomain.co.nr/">
-<img src="http://crnaa.4u.com.ru/808/2.gif" width="88" height="31" style="border: 0px;" alt="Free Domain Service" /></a></p></div>
+<?php if ($page == "") { ?><div style="float:right"><p><a href="http://www.freedomain.co.nr/">
+<img src="http://crnaa.4u.com.ru/808/2.gif" width="88" height="31" style="border: 0px;" alt="Free Domain Service" /></a></p></div><?php }?>
 <div style="float:left"><p><a href="http://validator.w3.org/check?uri=referer"><img
 src="http://www.w3.org/Icons/valid-xhtml11-blue"
 alt="Valid XHTML 1.1" height="31" width="88" /></a>
