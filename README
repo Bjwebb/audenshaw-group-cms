@@ -1,6 +1,6 @@
 ********** About this Program **********
 
-********** Copyright and Contact **********
+********** Copyright **********
 
 The php scripts that make up this website CMS - "This Program"
 Copyright (C) 2008 Benjamin Webb
@@ -18,11 +18,19 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 
-If you want to use this code for something that is for some reason
-not compatible with this license or have any other comments,
-you can contact me by e-mail and msn as bjwebb67@googlemail.com
-and on irc.freenode.net as user bjwebb. Also, I would love to know
-if anyone does do anything with this code.
+********** Update **********
+
+I am not longer actively working on the cms, and this particular
+branch of the code is no longer in use anywhere, http://adfa.co.nr/
+now uses mediawiki. ALthough I doubt it, if anyone does find any use
+for my code, please let me know by e-mail and msn: bjwebb67@googlemail.com
+or on irc.freenode.net as user bjwebb. I would be happy if anyone finds
+any use for it, so, if you ask, I will let you use it under any terms.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+If you are seeing this site by mistake, and are infact looking for ADFA,
+visit http://adfa.co.nr instead.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ********** Installation **********
 
