@@ -1,6 +1,12 @@
 <?php
 function checkPass($user, $password) {
     global $db_prefix_forum;
+    $bad_strings = array("\b", "\0", "\n", "\r", "\t", "\z",
+                     "/n", "/0", "/n", "/r", "/t", "/z",
+                     "$", "'", '"', "%", ";", "_", "*",
+                     "`", "drop table");
+    $password = str_replace($bad_strings, "", $input); //Avoid SQL Injection
+    $user = str_replace($bad_strings, "", $input); //Avoid SQL Injection
     global $con;
     $password = sha1($password);
     $result = mysql_query("SELECT * FROM ".$db_prefix_forum."users WHERE name='$user' AND password='$password'",$con);
